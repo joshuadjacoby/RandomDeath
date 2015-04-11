@@ -7,11 +7,14 @@ public class LevelLoader : MonoBehaviour {
     public int currentLevel = 0;
     public int[][] tiles;
     public int numberOfLevels;
-
+    private GameObject player;
+    private Vector2 playerStart;
 
 	// Use this for initialization
 	void Start () {
 	    // load all levels
+        player = GameObject.Find("Player");
+        playerStart = player.transform.position;
 
         LoadLevel();
 
@@ -72,7 +75,9 @@ public class LevelLoader : MonoBehaviour {
                 case 2:
                     sr.sprite = spikes;
                     go.name = "spikes";
-                    go.AddComponent<BoxCollider2D>().isTrigger = true;
+                    BoxCollider2D bc2 = go.AddComponent<BoxCollider2D>();
+                    bc2.isTrigger = true;
+                    bc2.size = bc2.size * .5f;
                     go.AddComponent<Rigidbody2D>().isKinematic = true;
                     go.AddComponent<SpikeScript>();
                     break;
@@ -82,12 +87,17 @@ public class LevelLoader : MonoBehaviour {
         }
 
         // make tiles twice as big
-        tilesGameObject.transform.localScale = new Vector3(2f, 2f, 2f);
+        tilesGameObject.transform.localScale = new Vector3(1/tileSize, 1/tileSize, 1/tileSize);
 
     }
 	
 	// Update is called once per frame
 	void Update () {
-	
+        if (Input.GetKey(KeyCode.R)) {
+            player.transform.position = playerStart;
+            PlayerScript.health = 1;
+            player.SetActive(true);
+
+        }
 	}
 }
