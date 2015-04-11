@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Spike
   - Door
+  - Level
   layers:
   - Default
   - TransparentFX

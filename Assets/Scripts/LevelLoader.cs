@@ -90,7 +90,7 @@ public class LevelLoader : MonoBehaviour {
         tilesGameObject.transform.localScale = new Vector3(1/tileSize, 1/tileSize, 1/tileSize);
     }
 
-    public void sendToDungeon(GameObject a)
+    public void sendToDungeon()
     {
         
     }

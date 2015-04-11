@@ -2,17 +2,24 @@
 using System.Collections;
 
 public class PlayerScript : MonoBehaviour {
-    public static int health;
+    public int health;
     public Rigidbody2D r;
+    public bool canMove;
     // Use this for initialization
     void Start() {
         health = 1;
         r = GetComponent<Rigidbody2D>();
+        canMove = true;
     }
 
 	void ApplyDamage(int i) {
 		health -= i;
 	}
+
+    void toggleTrap()
+    {
+        canMove = !canMove;
+    }
 
     void Update() {
         if (health <= 0)
