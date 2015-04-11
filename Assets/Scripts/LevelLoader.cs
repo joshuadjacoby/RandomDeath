@@ -88,7 +88,11 @@ public class LevelLoader : MonoBehaviour {
 
         // make tiles twice as big
         tilesGameObject.transform.localScale = new Vector3(1/tileSize, 1/tileSize, 1/tileSize);
+    }
 
+    public void sendToDungeon(GameObject a)
+    {
+        
     }
 	
 	// Update is called once per frame

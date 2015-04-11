@@ -2,11 +2,10 @@
 using System.Collections;
 
 public class SpikeScript : MonoBehaviour {
-    private GameObject player;
 
 	// Use this for initialization
 	void Start () {
-        player = GameObject.Find("Player");
+
 	}
 	
 	// Update is called once per frame
@@ -14,12 +13,9 @@ public class SpikeScript : MonoBehaviour {
 	 
 	}
 
-    void OnTriggerEnter2D(Collider2D col)
-    {
+    void OnTriggerEnter2D(Collider2D col) {
         if (col.gameObject.tag == "Player")
-        {
             PlayerScript.health--;
-        }
 
     }
 }
