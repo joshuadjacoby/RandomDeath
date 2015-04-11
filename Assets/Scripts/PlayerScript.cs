@@ -16,16 +16,16 @@ public class PlayerScript : MonoBehaviour {
 		health -= i;
 	}
 
-<<<<<<< HEAD
+//<<<<<<< HEAD
     void toggleTrap()
     {
         canMove = !canMove;
     }
-=======
+//=======
 	void ZeroHealth() {
 		health = 0;
 	}
->>>>>>> b3b1e669e351c5a206bc4dd214ab9728074c8bbf
+//>>>>>>> b3b1e669e351c5a206bc4dd214ab9728074c8bbf
 
     void Update() {
         if (health <= 0)

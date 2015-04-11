@@ -15,7 +15,8 @@ public class BearTrapScript : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.gameObject.tag == "Player")
-            player.toggleTrap();
+		if (col.gameObject.tag == "Player") {
+		}
+            //player.toggleTrap();
     }
 }
