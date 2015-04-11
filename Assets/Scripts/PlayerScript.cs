@@ -10,13 +10,17 @@ public class PlayerScript : MonoBehaviour {
         r = GetComponent<Rigidbody2D>();
     }
 
+	void ApplyDamage(int i) {
+		health -= i;
+	}
+
     void Update() {
         if (health <= 0)
             gameObject.SetActive(false);
     }
     // Update is called once per frame
     void FixedUpdate() {
-        float speed = 2f;
+        float speed = 2.0f;
 
         float x = Input.GetAxis("Horizontal");
         float y = Input.GetAxis("Vertical");
