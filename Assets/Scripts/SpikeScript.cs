@@ -3,9 +3,11 @@ using System.Collections;
 
 public class SpikeScript : MonoBehaviour {
 
+
+	private int damage;
 	// Use this for initialization
 	void Start () {
-
+		damage = 1;
 	}
 	
 	// Update is called once per frame
@@ -15,7 +17,7 @@ public class SpikeScript : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D col) {
         if (col.gameObject.tag == "Player")
-            PlayerScript.health--;
+			col.gameObject.BroadcastMessage ("ApplyDamage", damage);
 
     }
 }
