@@ -46,11 +46,17 @@ public class BearTrapScript : MonoBehaviour {
 
     void OnTriggerExit2D(Collider2D col)
     {
+<<<<<<< HEAD
         if (col.gameObject.tag == "Player")
         {
             timerOn = false;
             timer = 5.0f;
             isEnabled = true;
         }
+=======
+		if (col.gameObject.tag == "Player") {
+		}
+            //player.toggleTrap();
+>>>>>>> 73e475d2f5d31b1325fa48b4575600435de6dc28
     }
 }

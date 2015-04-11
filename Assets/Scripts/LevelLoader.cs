@@ -99,6 +99,10 @@ public class LevelLoader : MonoBehaviour {
 	void Update () {
         if (Input.GetKey(KeyCode.R)) {
             player.transform.position = playerStart;
+<<<<<<< HEAD
+=======
+            //PlayerScript.health = 1;
+>>>>>>> 73e475d2f5d31b1325fa48b4575600435de6dc28
             player.SetActive(true);
         }
 	}
