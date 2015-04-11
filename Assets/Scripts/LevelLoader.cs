@@ -20,7 +20,7 @@ public class LevelLoader : MonoBehaviour {
 
     private void LoadLevel() {
         
-        Texture2D tex = (Texture2D)Resources.Load("level1");
+        Texture2D tex = (Texture2D)Resources.Load("levels/level1");
         Color32[] colors = tex.GetPixels32();
 
         Dictionary<Color32, int> table = new Dictionary<Color32, int>();
@@ -41,32 +41,40 @@ public class LevelLoader : MonoBehaviour {
         }
 
 
-        Sprite ground = Resources.Load<Sprite>("ground");
-        Sprite wall = Resources.Load<Sprite>("wall");
-        Sprite spikes = Resources.Load<Sprite>("spikes");
+        Sprite ground = Resources.Load<Sprite>("sprites/ground");
+        Sprite wall = Resources.Load<Sprite>("sprites/wall");
+        Sprite spikes = Resources.Load<Sprite>("sprites/spikes");
 
-        float tileSize = 32f / ground.pixelsPerUnit;
+        float tileSize = 32f / 100f;
 
         GameObject tilesGameObject = new GameObject("tiles");
         
         for (int i = 0; i < tiles.Length; i++) {
             GameObject go = new GameObject();
+
             go.transform.parent = tilesGameObject.transform;
             
             SpriteRenderer sr = go.AddComponent<SpriteRenderer>();
 
 
-            
             go.transform.position = new Vector2((i % width) * tileSize, (i / width) * tileSize);
             switch (tiles[i]) {
                 case 0:
                     sr.sprite = ground;
+                    go.name = "ground";
                     break;
                 case 1:
                     sr.sprite = wall;
+                    go.name = "wall";
+                    go.AddComponent<BoxCollider2D>();
+                    go.AddComponent<Rigidbody2D>().isKinematic = true;
                     break;
                 case 2:
                     sr.sprite = spikes;
+                    go.name = "spikes";
+                    go.AddComponent<BoxCollider2D>().isTrigger = true;
+                    go.AddComponent<Rigidbody2D>().isKinematic = true;
+                    go.AddComponent<SpikeScript>();
                     break;
                 default:
                     break;

@@ -4,18 +4,16 @@ using System.Collections;
 public class PlayerScript : MonoBehaviour {
     public static int health;
     public Rigidbody2D r;
-    public Renderer rend;
 	// Use this for initialization
 	void Start () {
         health = 1;
         r = GetComponent<Rigidbody2D>();
-        rend = GetComponent<Renderer>();
 	}
 	
     void Update()
     {
-        if(health == 0)
-            rend.enabled = false;
+        if (health <= 0)
+            gameObject.SetActive(false);
     }
 	// Update is called once per frame
 	void FixedUpdate () {

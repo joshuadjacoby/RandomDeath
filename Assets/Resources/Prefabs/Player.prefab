@@ -71,7 +71,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   r: {fileID: 0}
-  rend: {fileID: 0}
 --- !u!212 &21251240
 SpriteRenderer:
   m_ObjectHideFlags: 1

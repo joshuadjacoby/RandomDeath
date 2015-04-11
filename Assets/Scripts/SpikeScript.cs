@@ -19,6 +19,7 @@ public class SpikeScript : MonoBehaviour {
         if (col.gameObject.tag == "Player")
         {
             PlayerScript.health--;
+            //Debug.Log(PlayerScript.health);
         }
 
     }
