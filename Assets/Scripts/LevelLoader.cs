@@ -25,6 +25,7 @@ public class LevelLoader : MonoBehaviour {
 
         Dictionary<Color32, int> table = new Dictionary<Color32, int>();
         int n = 0;
+        int width = tex.width;
         for (int i = colors.Length - tex.width; true; i++) {
             Color32 color = colors[i];
             if (!table.ContainsKey(color)) {
@@ -39,14 +40,41 @@ public class LevelLoader : MonoBehaviour {
             tiles[i] = table[colors[i]];
         }
 
+
+        Sprite ground = Resources.Load<Sprite>("ground");
+        Sprite wall = Resources.Load<Sprite>("wall");
+        Sprite spikes = Resources.Load<Sprite>("spikes");
+
+        float tileSize = 32f / ground.pixelsPerUnit;
+
+        GameObject tilesGameObject = new GameObject("tiles");
+        
         for (int i = 0; i < tiles.Length; i++) {
-            Debug.Log(tiles[i]);
+            GameObject go = new GameObject();
+            go.transform.parent = tilesGameObject.transform;
+            
+            SpriteRenderer sr = go.AddComponent<SpriteRenderer>();
 
+
+            
+            go.transform.position = new Vector2((i % width) * tileSize, (i / width) * tileSize);
+            switch (tiles[i]) {
+                case 0:
+                    sr.sprite = ground;
+                    break;
+                case 1:
+                    sr.sprite = wall;
+                    break;
+                case 2:
+                    sr.sprite = spikes;
+                    break;
+                default:
+                    break;
+            }
         }
-        
-        
-        
 
+        // make tiles twice as big
+        tilesGameObject.transform.localScale = new Vector3(2f, 2f, 2f);
 
     }
 	
