@@ -11,7 +11,7 @@ public class PitfallScript : MonoBehaviour {
 	// RS: upon entering trigger, send player to another room
 	void OnTriggerEnter2D (Collider2D col) {
 		if (col.gameObject.tag == "Player")
-			Debug.Log ("im falling!");
+			col.gameObject.BroadcastMessage ("ZeroHealth");
 	}
 
 	// Update is called once per frame

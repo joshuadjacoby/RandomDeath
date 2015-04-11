@@ -14,6 +14,10 @@ public class PlayerScript : MonoBehaviour {
 		health -= i;
 	}
 
+	void ZeroHealth() {
+		health = 0;
+	}
+
     void Update() {
         if (health <= 0)
             gameObject.SetActive(false);
