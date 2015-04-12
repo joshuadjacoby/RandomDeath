@@ -21,6 +21,10 @@ public class EnemyScript : MonoBehaviour {
 	private bool wandering;
 	private float speed;
 
+    public Material normal;
+    public Material grab;
+    private MeshRenderer mr;
+
 	// Use this for initialization
 	void Start () {
 		player = GameObject.Find ("Player");
@@ -31,6 +35,9 @@ public class EnemyScript : MonoBehaviour {
 		agroRange = 5.0f;
 		damage = 1;
         health = 2;
+
+        mr = transform.Find("Mesh").GetComponent<MeshRenderer>();
+        mr.material = normal;
 
 		// RS: Movement stuff
 		lastSeen = player.transform.position;
@@ -80,8 +87,10 @@ public class EnemyScript : MonoBehaviour {
 	}
 
 	void OnCollisionEnter (Collision col) {
-		if (col.gameObject.tag == "Player")
-			col.gameObject.BroadcastMessage ("ApplyDamage" , damage);
+        if (col.gameObject.tag == "Player") {
+            col.gameObject.BroadcastMessage("ApplyDamage", damage);
+            mr.material = grab;
+        }
 	}
 	                                     
 	                                     

@@ -10,7 +10,6 @@ GameObject:
   - 4: {fileID: 468038}
   - 65: {fileID: 6559870}
   - 114: {fileID: 11400234}
-  - 114: {fileID: 11490188}
   m_Layer: 0
   m_Name: Bear Trap
   m_TagString: Untagged
@@ -48,20 +47,9 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 180790}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cf52dd3225ff91e43b83614fe92a3b0e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &11490188
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 180790}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 500f14df4e3e90f418f6e3e63b1a48c7, type: 3}
+  m_Script: {fileID: 11500000, guid: cf52dd3225ff91e43b83614fe92a3b0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &100100000

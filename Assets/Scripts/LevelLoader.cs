@@ -34,6 +34,7 @@ public class LevelLoader : MonoBehaviour {
 
     private Object spikes;
     private Object bearTrap;
+    private Object lockedDoor;
     private Object exit;
     private Object zombie;
 
