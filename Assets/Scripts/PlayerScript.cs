@@ -10,14 +10,16 @@ public class PlayerScript : MonoBehaviour
     private bool slow;
     private float slowTimer;
     public Vector3 start;
-    private float mouseSensitivity;
     private bool canSprint;
     private bool isSprinting;
     private float sprintTimer;
     private float sprintCooldown;
+    private float mouseSensitivity;
     private float controllerSensitivity;
     private float verticleLook;
     private Transform cameraTransform;
+    private LevelLoader level;
+    private float restartTimer = 0f;
 
     // Use this for initialization
     void Start()
@@ -36,6 +38,7 @@ public class PlayerScript : MonoBehaviour
         sprintTimer = 2.0f;
         sprintCooldown = 5.0f;
         cameraTransform = transform.Find("MainCamera").transform;
+        level = GameObject.Find("Level").GetComponent<LevelLoader>();
     }
 
     void ApplyDamage(int i)
@@ -43,35 +46,40 @@ public class PlayerScript : MonoBehaviour
         health -= i;
     }
 
-    /*void toggleTrap()
-    {
-        canMove = !canMove;
-    }*/
-
     void toggleSlow()
     {
         slow = !slow;
     }
-
-    void ZeroHealth()
-    {
-        health = 0;
-    }
-
 
     public void ResetPlayer()
     {
         health = 1;
         canMove = true;
         transform.position = start;
-        gameObject.SetActive(true);
+        r.isKinematic = false;
     }
 
 
     void Update()
     {
-        if (health <= 0)
-            gameObject.SetActive(false);
+
+        if (Input.GetKeyDown(KeyCode.R) || Input.GetButtonDown("Select")) {
+            level.LoadLevel();
+            ResetPlayer();
+        }
+
+        if (health <= 0 && canMove) {
+            canMove = false;
+            r.isKinematic = true;
+            restartTimer = 2f;
+        }
+
+        restartTimer -= Time.deltaTime;
+        if (restartTimer < 0f && !canMove) {
+            level.LoadLevel();
+            ResetPlayer();
+        }
+            
 
         float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
         float controllerX = Input.GetAxis("Right Horizontal") * controllerSensitivity * Time.deltaTime;
