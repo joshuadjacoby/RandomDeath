@@ -25,10 +25,10 @@ public class CrateScript : MonoBehaviour {
 
 			if(randomValue > 0.5)
 			{
-				player.gameObject.BroadcastMessage("ZeroHealth");
+				/*player.gameObject.BroadcastMessage("ZeroHealth");
 				transform.position = player.transform.position;
 				rend.enabled = true;
-
+				*/
 			}
 
 		}
