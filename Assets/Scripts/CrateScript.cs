@@ -23,12 +23,12 @@ public class CrateScript : MonoBehaviour {
 			randomValue = Random.value;
 			Debug.Log (randomValue);
 
-			if(randomValue > 0.5)
+			if(randomValue > 0.9)
 			{
-				/*player.gameObject.BroadcastMessage("ZeroHealth");
+				player.gameObject.BroadcastMessage("ZeroHealth");
 				transform.position = player.transform.position;
 				rend.enabled = true;
-				*/
+
 			}
 
 		}
