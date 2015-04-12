@@ -14,9 +14,9 @@ public class SpikeScript : MonoBehaviour {
 	 
 	}
 
-    void OnTriggerEnter2D(Collider2D col) {
-        if (col.gameObject.tag == "Player")
-			col.gameObject.BroadcastMessage ("ApplyDamage", damage);
-
+    void OnTriggerEnter(Collider col) {
+        if (col.gameObject.tag == "Player") {
+            col.gameObject.BroadcastMessage("ApplyDamage", damage);
+        }
     }
 }

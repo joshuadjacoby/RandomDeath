@@ -3,40 +3,38 @@ using System.Collections;
 
 public class PlayerScript : MonoBehaviour {
     public int health;
-    public Rigidbody2D r;
+    private Rigidbody r;
     public bool canMove;
+    public Vector3 start;
 
     // Use this for initialization
     void Start() {
         health = 1;
-        r = GetComponent<Rigidbody2D>();
+        r = GetComponent<Rigidbody>();
         canMove = true;
+        start = transform.position;
     }
 
 	void ApplyDamage(int i) {
 		health -= i;
 	}
 
-<<<<<<< HEAD
-=======
-//<<<<<<< HEAD
->>>>>>> 73e475d2f5d31b1325fa48b4575600435de6dc28
     void toggleTrap()
     {
         canMove = !canMove;
     }
-<<<<<<< HEAD
 
 	void ZeroHealth() {
 		health = 0;
 	}
-=======
-//=======
-	void ZeroHealth() {
-		health = 0;
-	}
-//>>>>>>> b3b1e669e351c5a206bc4dd214ab9728074c8bbf
->>>>>>> 73e475d2f5d31b1325fa48b4575600435de6dc28
+
+    public void ResetPlayer() {
+        health = 1;
+        canMove = true;
+        transform.position = start;
+        gameObject.SetActive(true);
+    }
+
 
     void Update() {
         if (health <= 0)
@@ -52,13 +50,11 @@ public class PlayerScript : MonoBehaviour {
             float x = Input.GetAxis("Horizontal");
             float y = Input.GetAxis("Vertical");
 
-            r.velocity = new Vector2(x * speed, y * speed);
-
-            r.AddForce(new Vector2(), ForceMode2D.Force);
+            r.velocity = new Vector3(x * speed, 0, y*speed);
         }
         else
         {
-            r.velocity = new Vector2(0, 0);
+            r.velocity = Vector3.zero;
         }
     }
 }

@@ -12,8 +12,7 @@ public class LevelLoader : MonoBehaviour {
     public Texture2D atlas;
     public Rect[] rects;
 
-    private GameObject player;
-    private Vector2 playerStart;
+    private PlayerScript player;
 
     private Mesh mesh;
 
@@ -31,14 +30,14 @@ public class LevelLoader : MonoBehaviour {
     // Use this for initialization
     void Start() {
         // load all levels
-        player = GameObject.Find("Player");
-        playerStart = player.transform.position;
+        player = GameObject.Find("Player").GetComponent<PlayerScript>();
 
         atlas = new Texture2D(1024, 1024);
-        atlas.filterMode = FilterMode.Point;
         rects = atlas.PackTextures(textures, 0, 1024);
+        atlas.filterMode = FilterMode.Point;
+        atlas.wrapMode = TextureWrapMode.Clamp;
 
-        Material mat = (Material)Resources.Load("sprites/level");
+        Material mat = (Material)Resources.Load("materials/level");
         mat.SetTexture(0, atlas);
 
         GetComponent<MeshRenderer>().material = mat;
@@ -82,6 +81,9 @@ public class LevelLoader : MonoBehaviour {
         verts.Clear();
         uvs.Clear();
         triNum = 0;
+
+        GameObject things = new GameObject("things");
+
         for (int y = 0; y < height; y++) {
             for (int x = 0; x < width; x++) {
 
@@ -155,6 +157,16 @@ public class LevelLoader : MonoBehaviour {
                     case 2:
                         break;
                     case 3:
+                        GameObject go = new GameObject("spikes");
+                        go.transform.position = new Vector3(x + .5f, .5f, y + .5f);
+                        BoxCollider box = go.AddComponent<BoxCollider>();
+                        box.size = Vector3.one * .5f;
+                        box.isTrigger = true;
+                        go.AddComponent<SpikeScript>();
+
+
+                        go.transform.parent = things.transform;
+
                         break;
                     default:
                         break;
@@ -173,12 +185,18 @@ public class LevelLoader : MonoBehaviour {
         mesh.RecalculateNormals();
 
         gameObject.GetComponent<MeshFilter>().mesh = mesh;
+        gameObject.GetComponent<MeshCollider>().sharedMesh = mesh;
 
     }
 
     public void addUvsTris(int index) {
         if (index == 1) {
             index = Random.value < .2 ? 4 : 1;
+        }
+
+        if (index > 4) {
+            index = 0;  // set it as ground
+
         }
         
         Rect r = rects[index];
@@ -215,10 +233,8 @@ public class LevelLoader : MonoBehaviour {
     // Update is called once per frame
     void Update() {
         if (Input.GetKey(KeyCode.R)) {
-            player.transform.position = playerStart;
-            PlayerScript.health = 1;
-            player.SetActive(true);
-
+            player.ResetPlayer();
         }
     }
+
 }
