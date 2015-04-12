@@ -97,7 +97,7 @@ GameObject:
   - 4: {fileID: 518990113}
   - 54: {fileID: 518990115}
   - 114: {fileID: 518990114}
-  - 135: {fileID: 518990116}
+  - 136: {fileID: 518990116}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -116,8 +116,9 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1260249779}
+  - {fileID: 1500026033}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
 --- !u!114 &518990114
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -134,6 +135,7 @@ MonoBehaviour:
   slow: 0
   slowTimer: 0
   start: {x: 0, y: 0, z: 0}
+  mouseSensitivity: 100
 --- !u!54 &518990115
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -149,17 +151,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!135 &518990116
-SphereCollider:
+--- !u!136 &518990116
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 518990112}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 264baa85016ebcb4da9814a6d50b0552, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: .400000006
+  m_Radius: .300000012
+  m_Height: .870000005
+  m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &611231062
 GameObject:
@@ -187,8 +190,8 @@ Light:
   serializedVersion: 6
   m_Type: 2
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 4.38999987
-  m_Range: 10
+  m_Intensity: 4
+  m_Range: 5
   m_SpotAngle: 30
   m_CookieSize: 10
   m_Shadows:
@@ -215,7 +218,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 611231062}
-  m_LocalRotation: {x: -.707106829, y: 0, z: 0, w: .707106709}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -237,7 +240,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!23 &1260249777
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -277,7 +280,7 @@ Transform:
   m_GameObject: {fileID: 1260249776}
   m_LocalRotation: {x: .707106829, y: 0, z: 0, w: .707106709}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: .5, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 518990113}
   m_RootOrder: 0
@@ -293,7 +296,6 @@ GameObject:
   - 124: {fileID: 1500026036}
   - 92: {fileID: 1500026035}
   - 81: {fileID: 1500026034}
-  - 114: {fileID: 1500026038}
   m_Layer: 0
   m_Name: MainCamera
   m_TagString: MainCamera
@@ -307,12 +309,12 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1500026032}
-  m_LocalRotation: {x: .707106829, y: 0, z: 0, w: .707106709}
-  m_LocalPosition: {x: 2, y: 6, z: 2}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 611231064}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 518990113}
   m_RootOrder: 1
 --- !u!81 &1500026034
 AudioListener:
@@ -351,10 +353,10 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: .300000012
+  near clip plane: .100000001
   far clip plane: 1000
   field of view: 60
-  orthographic: 1
+  orthographic: 0
   orthographic size: 3.0999999
   m_Depth: 0
   m_CullingMask:
@@ -367,18 +369,6 @@ Camera:
   m_OcclusionCulling: 0
   m_StereoConvergence: 10
   m_StereoSeparation: .0219999999
---- !u!114 &1500026038
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1500026032}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d57b0d2fe192d1945a8b64d09e8c33cf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  zoom: 1.5
 --- !u!1 &1881245574
 GameObject:
   m_ObjectHideFlags: 0
@@ -416,6 +406,9 @@ MonoBehaviour:
   - {fileID: 2800000, guid: 12c3e6870e2ca6048828ba0b3ac5ad32, type: 3}
   - {fileID: 2800000, guid: c8daafec743158743b547da7a3d4f2de, type: 3}
   - {fileID: 2800000, guid: f824950ebf5b211409feaa6630e7c3b0, type: 3}
+  - {fileID: 2800000, guid: 32e6b4dd8326a98408f60dbc4b5edd73, type: 3}
+  - {fileID: 2800000, guid: f55a788a7af3a97408796a6cb3131dab, type: 3}
+  - {fileID: 2800000, guid: ef5c29c6edceff64fb8dd1a3bbc5fb87, type: 3}
   - {fileID: 2800000, guid: ef5c29c6edceff64fb8dd1a3bbc5fb87, type: 3}
   atlas: {fileID: 0}
   rects: []
