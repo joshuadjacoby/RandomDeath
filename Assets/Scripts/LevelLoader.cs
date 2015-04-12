@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class LevelLoader : MonoBehaviour {
 
-    public int currentLevel = 0;
+    private int currentLevel = 1;
     public int[,] tiles;
     public int numberOfLevels;
 
@@ -34,8 +34,7 @@ public class LevelLoader : MonoBehaviour {
 
     private Object spikes;
     private Object bearTrap;
-   
-    
+    private Object exit;
 
 
     // Use this for initialization
@@ -56,11 +55,18 @@ public class LevelLoader : MonoBehaviour {
 
         spikes = Resources.Load("prefabs/spikes");
         bearTrap = Resources.Load("prefabs/bear trap");
-        
-		string l = "Levels/level1"; 
+        exit = Resources.Load("prefabs/exit");
 
-        LoadLevel(l);
+        LoadLevel("Levels/level1");
 
+
+    }
+
+    public void loadNextLevel() {
+        Destroy(mesh);
+        Destroy(GameObject.Find("things"));
+
+        LoadLevel("Levels/level" + ++currentLevel);
 
     }
 
@@ -193,10 +199,16 @@ public class LevelLoader : MonoBehaviour {
                         break;
 
                     case ENTRANCE:
-
+                        player.start = new Vector3(x, 0, y);
+                        player.ResetPlayer();
+                        
                         break;
 
                     case EXIT:
+                        go = (GameObject)Instantiate(exit, new Vector3(x + .5f, .5f, y + .5f), Quaternion.identity);
+                        go.name = "Exit";
+                        go.transform.parent = things.transform;
+
                         break;
 
                     default:
@@ -221,8 +233,12 @@ public class LevelLoader : MonoBehaviour {
     }
 
     public void addUvsTris(int index) {
+        Debug.Log(rects.Length);
         if (index == WALL) {
             index = Random.value < .2 ? 9 : WALL;
+        }
+        if (index == SPAWN_ENEMY) {
+            index = GROUND;
         }
 
         Rect r = rects[index];
@@ -250,6 +266,7 @@ public class LevelLoader : MonoBehaviour {
         switch (tiles[x, y]) {
             case WALL:
             case CRATE:
+            case EXIT:
                 return 1;
             default:
                 return 0;
