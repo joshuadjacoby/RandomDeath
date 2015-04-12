@@ -4,9 +4,9 @@ using System.Collections.Generic;
 
 public class LevelLoader : MonoBehaviour {
 
-    private int currentLevel = 1;
+    private int currentLevel = 3;
     public int[,] tiles;
-    public int numberOfLevels;
+    private int numberOfLevels;
 
     public Texture2D[] textures;
     public Texture2D atlas;
@@ -64,12 +64,12 @@ public class LevelLoader : MonoBehaviour {
 
     }
 
-    public void loadNextLevel() {
+    public void LoadNextLevel() {
         ++currentLevel;
         LoadLevel();
     }
 
-    private void LoadLevel() {
+    public void LoadLevel() {
         if (mesh != null) {
             Destroy(mesh);
         }
@@ -247,6 +247,10 @@ public class LevelLoader : MonoBehaviour {
             index = Random.value < .2 ? 9 : WALL;
         }
 
+        if (index == SPIKES) {
+            index = GROUND;
+        }
+
         Rect r = rects[index];
 
         uvs.Add(new Vector2(r.xMin , r.yMax ));
@@ -279,12 +283,5 @@ public class LevelLoader : MonoBehaviour {
         }
     }
 
-    // Update is called once per frame
-    void Update() {
-        if (Input.GetKeyDown(KeyCode.R)||Input.GetButtonDown("Select")) {
-            LoadLevel();
-            player.ResetPlayer();
-        }
-    }
 
 }

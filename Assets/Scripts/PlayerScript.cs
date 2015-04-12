@@ -4,13 +4,22 @@ using System;
 
 public class PlayerScript : MonoBehaviour
 {
-    public int health;
+    private int health;
     private Rigidbody r;
-    public bool canMove;
-    public bool slow;
-    public float slowTimer;
+    private bool canMove;
+    private bool slow;
+    private float slowTimer;
     public Vector3 start;
-    public float mouseSensitivity = 200f;
+    private bool canSprint;
+    private bool isSprinting;
+    private float sprintTimer;
+    private float sprintCooldown;
+    private float mouseSensitivity;
+    private float controllerSensitivity;
+    private float verticleLook;
+    private Transform cameraTransform;
+    private LevelLoader level;
+    private float restartTimer = 0f;
 
     // Use this for initialization
     void Start()
@@ -19,9 +28,17 @@ public class PlayerScript : MonoBehaviour
         r = GetComponent<Rigidbody>();
         canMove = true;
         slow = false;
-        slowTimer = 3.0f;
+        slowTimer = 5.0f;
         start = transform.position;
         Cursor.lockState = CursorLockMode.Locked;
+        mouseSensitivity = 300f;
+        controllerSensitivity = 300f;
+        canSprint = true;
+        isSprinting = false;
+        sprintTimer = 2.0f;
+        sprintCooldown = 5.0f;
+        cameraTransform = transform.Find("MainCamera").transform;
+        level = GameObject.Find("Level").GetComponent<LevelLoader>();
     }
 
     void ApplyDamage(int i)
@@ -29,37 +46,52 @@ public class PlayerScript : MonoBehaviour
         health -= i;
     }
 
-    void toggleTrap()
-    {
-        canMove = !canMove;
-    }
-
     void toggleSlow()
     {
         slow = !slow;
     }
-
-    void ZeroHealth()
-    {
-        health = 0;
-    }
-
 
     public void ResetPlayer()
     {
         health = 1;
         canMove = true;
         transform.position = start;
-        gameObject.SetActive(true);
+        r.isKinematic = false;
     }
 
 
     void Update()
     {
-        if (health <= 0)
-            gameObject.SetActive(false);
 
-        transform.Rotate(0, Input.GetAxis("Mouse X") == 0 ? Input.GetAxis("Right Horizontal")*5 : Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime, 0);
+        if (Input.GetKeyDown(KeyCode.R) || Input.GetButtonDown("Select")) {
+            level.LoadLevel();
+            ResetPlayer();
+        }
+
+        if (health <= 0 && canMove) {
+            canMove = false;
+            r.isKinematic = true;
+            restartTimer = 2f;
+        }
+
+        restartTimer -= Time.deltaTime;
+        if (restartTimer < 0f && !canMove) {
+            level.LoadLevel();
+            ResetPlayer();
+        }
+            
+
+        float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
+        float controllerX = Input.GetAxis("Right Horizontal") * controllerSensitivity * Time.deltaTime;
+
+        float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
+        float controllerY = -Input.GetAxis("Right Vertical") * controllerSensitivity * Time.deltaTime;
+
+        float rot = mouseX == 0 ? controllerX : mouseX;
+        verticleLook -= mouseY == 0 ? controllerY : mouseY;
+        verticleLook = Mathf.Clamp(verticleLook, -80f, 80f);
+        cameraTransform.localRotation = Quaternion.Euler(verticleLook, 0, 0);
+        transform.Rotate(0, rot, 0);
     }
 
     // Update is called once per frame
@@ -67,22 +99,42 @@ public class PlayerScript : MonoBehaviour
     {
         if (canMove)
         {
-			float speed = 2.0f;
+			float speed = 1.2f;
 
             if (slow && slowTimer > 0)
             {
-                speed *= .3f;
+                speed *= .5f;
                 slowTimer -= Time.deltaTime;
                 //Debug.Log(slowTimer);
             }
             else if (slow && slowTimer <= 0)
             {
                 slow = false;
-                slowTimer = 3.0f;
+                slowTimer = 5.0f;
             }
-            if (Input.GetKey(KeyCode.LeftShift) || Input.GetButton("Left Analog"))
+            if (canSprint && Input.GetKey(KeyCode.LeftShift) || Input.GetButton("Left Analog"))
+            {
+                isSprinting = true;
+            }
+            else if (!canSprint)
+            {
+                sprintCooldown -= Time.deltaTime;
+            }
+            if (isSprinting)
             {
                 speed *= 2f;
+                sprintTimer -= Time.deltaTime;
+            }
+            if (sprintTimer <= 0)
+            {
+                isSprinting = false;
+                sprintTimer = 2.0f;
+                canSprint = false;
+            }
+            if (sprintCooldown <= 0)
+            {
+                canSprint = true;
+                sprintCooldown = 5.0f;
             }
             float x = Input.GetAxis("Horizontal");
             float y = Input.GetAxis("Vertical");

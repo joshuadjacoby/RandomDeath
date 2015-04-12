@@ -16,7 +16,7 @@ public class LevelChanger : MonoBehaviour {
 	void OnTriggerEnter(Collider col)
 	{
 		if (col.gameObject.tag == "Player") {
-            l.loadNextLevel();
+            l.LoadNextLevel();
             Destroy(this);
 		}
 	}
