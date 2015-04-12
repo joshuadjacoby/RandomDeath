@@ -20,7 +20,6 @@ public class BearTrapScript : MonoBehaviour
         if (timerOn && timer > 0)
         {
             timer -= Time.deltaTime;
-            Debug.Log(timer);
         }
         if (timer <= 0)
         {
@@ -28,17 +27,16 @@ public class BearTrapScript : MonoBehaviour
         }
     }
 
-    void OnTriggerStay2D(Collider2D col)
+    void OnTriggerStay(Collider col)
     {
         if (col.gameObject.tag == "Player" && isEnabled)
         {
             col.gameObject.BroadcastMessage("toggleTrap");
-            col.gameObject.transform.position = Vector2.MoveTowards(col.gameObject.transform.position, transform.position, 1);
+            col.gameObject.transform.position = Vector3.MoveTowards(col.gameObject.transform.position, transform.position, 1);
             timerOn = true;
             if (Input.GetKey("space") || Input.GetButtonDown("Fire1") || Input.GetButtonUp("Fire1"))
             {
                 timer -= 0.05f;
-                Debug.Log("YAY");
             }
         }
         else
@@ -47,7 +45,7 @@ public class BearTrapScript : MonoBehaviour
         }
     }
 
-    void OnTriggerExit2D(Collider2D col)
+    void OnTriggerExit(Collider col)
     {
 
         if (col.gameObject.tag == "Player")
