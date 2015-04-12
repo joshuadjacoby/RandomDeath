@@ -10,18 +10,14 @@ public class PlayerScript : MonoBehaviour
     private bool slow;
     private float slowTimer;
     public Vector3 start;
-<<<<<<< HEAD
     private float mouseSensitivity;
     private bool canSprint;
     private bool isSprinting;
     private float sprintTimer;
     private float sprintCooldown;
-=======
-    public float mouseSensitivity = 300f;
-    public float controllerSensitivity = 300f;
+    private float controllerSensitivity;
     private float verticleLook;
     private Transform cameraTransform;
->>>>>>> b6608ed2c6adc805e7e9833d633b4e4a7cc1d0f1
 
     // Use this for initialization
     void Start()
@@ -30,18 +26,16 @@ public class PlayerScript : MonoBehaviour
         r = GetComponent<Rigidbody>();
         canMove = true;
         slow = false;
-        slowTimer = 3.0f;
+        slowTimer = 5.0f;
         start = transform.position;
         Cursor.lockState = CursorLockMode.Locked;
-<<<<<<< HEAD
-        mouseSensitivity = 200f;
+        mouseSensitivity = 300f;
+        controllerSensitivity = 300f;
         canSprint = true;
         isSprinting = false;
         sprintTimer = 2.0f;
-        sprintCooldown = 4.0f;
-=======
+        sprintCooldown = 5.0f;
         cameraTransform = transform.Find("MainCamera").transform;
->>>>>>> b6608ed2c6adc805e7e9833d633b4e4a7cc1d0f1
     }
 
     void ApplyDamage(int i)
@@ -83,7 +77,7 @@ public class PlayerScript : MonoBehaviour
         float controllerX = Input.GetAxis("Right Horizontal") * controllerSensitivity * Time.deltaTime;
 
         float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
-        float controllerY = Input.GetAxis("Right Vertical") * controllerSensitivity * Time.deltaTime;
+        float controllerY = -Input.GetAxis("Right Vertical") * controllerSensitivity * Time.deltaTime;
 
         float rot = mouseX == 0 ? controllerX : mouseX;
         verticleLook -= mouseY == 0 ? controllerY : mouseY;
@@ -97,18 +91,18 @@ public class PlayerScript : MonoBehaviour
     {
         if (canMove)
         {
-			float speed = 2.0f;
+			float speed = 1.2f;
 
             if (slow && slowTimer > 0)
             {
-                speed *= .3f;
+                speed *= .5f;
                 slowTimer -= Time.deltaTime;
                 //Debug.Log(slowTimer);
             }
             else if (slow && slowTimer <= 0)
             {
                 slow = false;
-                slowTimer = 3.0f;
+                slowTimer = 5.0f;
             }
             if (canSprint && Input.GetKey(KeyCode.LeftShift) || Input.GetButton("Left Analog"))
             {
@@ -132,7 +126,7 @@ public class PlayerScript : MonoBehaviour
             if (sprintCooldown <= 0)
             {
                 canSprint = true;
-                sprintCooldown = 4.0f;
+                sprintCooldown = 5.0f;
             }
             float x = Input.GetAxis("Horizontal");
             float y = Input.GetAxis("Vertical");
