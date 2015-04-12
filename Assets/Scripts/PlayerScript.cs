@@ -19,6 +19,13 @@ public class PlayerScript : MonoBehaviour {
 		health -= i;
 	}
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+
+>>>>>>> 74fdf4fb19949a3a83c25b88c6287e6472c8c23b
+>>>>>>> 380917bc0edfc8a396ed5ef3c9499b2fb69e9ce0
     void toggleTrap()
     {
         canMove = !canMove;
@@ -27,6 +34,7 @@ public class PlayerScript : MonoBehaviour {
 	void ZeroHealth() {
 		health = 0;
 	}
+<<<<<<< HEAD
 
     public void ResetPlayer() {
         health = 1;
@@ -35,11 +43,14 @@ public class PlayerScript : MonoBehaviour {
         gameObject.SetActive(true);
     }
 
+=======
+>>>>>>> 380917bc0edfc8a396ed5ef3c9499b2fb69e9ce0
 
     void Update() {
         if (health <= 0)
             gameObject.SetActive(false);
     }
+
     // Update is called once per frame
     void FixedUpdate()
     {
