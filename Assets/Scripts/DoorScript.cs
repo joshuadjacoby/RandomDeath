@@ -54,27 +54,27 @@ public class DoorScript : MonoBehaviour {
 				//Debug.Log("in1");
 				//Ar.transform.position = new Vector3(1,1,1);
 				Ar.enabled = true;
-				if (Input.GetKeyDown (KeyCode.A)) {
+				if (Input.GetKeyDown (KeyCode.A) || Input.GetButtonDown("Fire1")) {
 					i++;
 					Ar.enabled = false;
 				}
 
 			} else if (key [i] == 'B') {
 				Br.enabled = true;
-				if (Input.GetKeyDown (KeyCode.B)) {
+				if (Input.GetKeyDown (KeyCode.B) || Input.GetButtonDown("Fire2")) {
 					i++;
 					Br.enabled = false;
 				}
 
 			} else if (key [i] == 'X') {
 				Xr.enabled = true;
-				if (Input.GetKeyDown (KeyCode.X)) {
+				if (Input.GetKeyDown (KeyCode.X) || Input.GetButtonDown("Fire3")) {
 					i++;
 					Xr.enabled = false;
 				}
 			} else if (key [i] == 'Y') {
 				Yr.enabled = true;
-				if (Input.GetKeyDown (KeyCode.Y)) {
+				if (Input.GetKeyDown (KeyCode.Y) || Input.GetButtonDown("Jump")) {
 					i++;
 					Yr.enabled = false;
 				}
