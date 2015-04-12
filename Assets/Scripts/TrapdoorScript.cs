@@ -21,18 +21,18 @@ public class TrapdoorScript : MonoBehaviour
 		}*/
     }
 
-    void OnTriggerEnter(Collider col)
+    void OnCollisionEnter(Collision col)
     {
         if (col.gameObject.tag == "Player") 
         {
-			col.gameObject.transform.position = Vector3.MoveTowards(col.gameObject.transform.position, transform.position, 1);
-			col.gameObject.BroadcastMessage("toggleTrap");
+			//col.gameObject.transform.position = Vector3.MoveTowards(col.gameObject.transform.position, transform.position, 1);
+			//col.gameObject.BroadcastMessage("toggleTrap");
 			inTrap = true;
 
         }
     }
 
-	void OnTriggerExit(Collider col)
+	void OnCollisionExit(Collision col)
 	{
 		if (col.gameObject.tag == "Player") 
 		{
