@@ -70,7 +70,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a04dda16c555b1344a04ffa6bef96968, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  r: {fileID: 0}
+  health: 0
+  canMove: 0
+  slow: 0
+  slowTimer: 0
+  start: {x: 0, y: 0, z: 0}
 --- !u!212 &21251240
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -95,7 +99,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: acc73461709081d4d8a055863ead3fb5, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8cae7193cd13fc54a98d63d388d05d57, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &100100000
 Prefab:

@@ -26,8 +26,11 @@ public class LevelLoader : MonoBehaviour {
     private const int WALL = 1;
     private const int CRATE = 2;
     private const int SPIKES = 3;
+    private const int BEAR_TRAP = 4;
 
     private Object spikes;
+    private Object bearTrap;
+    private Object trapdoor;
 
 
     // Use this for initialization
@@ -36,7 +39,7 @@ public class LevelLoader : MonoBehaviour {
         player = GameObject.Find("Player").GetComponent<PlayerScript>();
 
         atlas = new Texture2D(1024, 1024);
-        rects = atlas.PackTextures(textures, 0, 1024);
+        rects = atlas.PackTextures(textures, 2, 1024);
         atlas.filterMode = FilterMode.Point;
         atlas.wrapMode = TextureWrapMode.Clamp;
 
@@ -47,7 +50,9 @@ public class LevelLoader : MonoBehaviour {
 
 
         spikes = Resources.Load("prefabs/spikes");
-
+        bearTrap = Resources.Load("prefabs/bear trap");
+        trapdoor = Resources.Load("prefabs/trapdoor");
+        
         LoadLevel();
 
 
@@ -168,9 +173,15 @@ public class LevelLoader : MonoBehaviour {
                         break;
 
                     case 4:
+                        go = (GameObject)Instantiate(bearTrap, new Vector3(x + .5f, .5f, y + .5f), Quaternion.identity);
+                        go.name = "Bear Trap";
+                        go.transform.parent = things.transform;
+                        break;
 
-
-
+                    case 5:
+                        go = (GameObject)Instantiate(trapdoor, new Vector3(x + .5f, .5f, y + .5f), Quaternion.identity);
+                        go.name = "Trapdoor";
+                        go.transform.parent = things.transform;
                         break;
                     default:
                         break;
@@ -195,22 +206,24 @@ public class LevelLoader : MonoBehaviour {
 
     public void addUvsTris(int index) {
         if (index == 1) {
-            index = Random.value < .2 ? 4 : 1;
-        }
-
-        if (index > 4) {
-            index = 0;  // set it as ground
-
+            index = Random.value < .2 ? 7 : 1;
         }
 
         Rect r = rects[index];
 
-        uvs.Add(new Vector2(r.xMin, r.yMax));
-        uvs.Add(new Vector2(r.xMin, r.yMin));
-        uvs.Add(new Vector2(r.xMax, r.yMin));
-        uvs.Add(new Vector2(r.xMax, r.yMin));
-        uvs.Add(new Vector2(r.xMax, r.yMax));
-        uvs.Add(new Vector2(r.xMin, r.yMax));
+        //uvs.Add(new Vector2(r.xMin+.001f, r.yMax-.001f));
+        //uvs.Add(new Vector2(r.xMin+.001f, r.yMin+.001f));
+        //uvs.Add(new Vector2(r.xMax-.001f, r.yMin+.001f));
+        //uvs.Add(new Vector2(r.xMax-.001f, r.yMin+.001f));
+        //uvs.Add(new Vector2(r.xMax-.001f, r.yMax-.001f));
+        //uvs.Add(new Vector2(r.xMin+.001f, r.yMax-.001f));
+
+        uvs.Add(new Vector2(r.xMin , r.yMax ));
+        uvs.Add(new Vector2(r.xMin , r.yMin ));
+        uvs.Add(new Vector2(r.xMax , r.yMin ));
+        uvs.Add(new Vector2(r.xMax , r.yMin ));
+        uvs.Add(new Vector2(r.xMax , r.yMax ));
+        uvs.Add(new Vector2(r.xMin , r.yMax ));
 
         tris.Add(triNum++);
         tris.Add(triNum++);
