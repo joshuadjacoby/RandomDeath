@@ -80,7 +80,10 @@ public class PlayerScript : MonoBehaviour
                 slow = false;
                 slowTimer = 3.0f;
             }
-
+            if (Input.GetKey(KeyCode.LeftShift) || Input.GetButton("Left Analog"))
+            {
+                speed *= 2f;
+            }
             float x = Input.GetAxis("Horizontal");
             float y = Input.GetAxis("Vertical");
 
