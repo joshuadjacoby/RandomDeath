@@ -287,10 +287,9 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 1500026033}
-  - 20: {fileID: 1500026037}
-  - 124: {fileID: 1500026036}
   - 92: {fileID: 1500026035}
   - 81: {fileID: 1500026034}
+  - 20: {fileID: 1500026037}
   m_Layer: 0
   m_Name: MainCamera
   m_TagString: MainCamera
@@ -319,13 +318,6 @@ AudioListener:
   m_GameObject: {fileID: 1500026032}
   m_Enabled: 1
 --- !u!92 &1500026035
-Behaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1500026032}
-  m_Enabled: 1
---- !u!124 &1500026036
 Behaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
