@@ -98,6 +98,7 @@ GameObject:
   - 54: {fileID: 518990115}
   - 114: {fileID: 518990114}
   - 136: {fileID: 518990116}
+  - 114: {fileID: 518990117}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -164,6 +165,24 @@ CapsuleCollider:
   m_Height: .870000005
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &518990117
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 518990112}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9fc871e985bc4ed98b40eda7b4a4d34, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  axes: 1
+  sensitivityX: 15
+  sensitivityY: 0
+  minimumX: -360
+  maximumX: 360
+  minimumY: 0
+  maximumY: 0
 --- !u!1 &611231062
 GameObject:
   m_ObjectHideFlags: 0
@@ -296,6 +315,7 @@ GameObject:
   - 124: {fileID: 1500026036}
   - 92: {fileID: 1500026035}
   - 81: {fileID: 1500026034}
+  - 114: {fileID: 1500026038}
   m_Layer: 0
   m_Name: MainCamera
   m_TagString: MainCamera
@@ -369,6 +389,24 @@ Camera:
   m_OcclusionCulling: 0
   m_StereoConvergence: 10
   m_StereoSeparation: .0219999999
+--- !u!114 &1500026038
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1500026032}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9fc871e985bc4ed98b40eda7b4a4d34, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  axes: 2
+  sensitivityX: 10
+  sensitivityY: 10
+  minimumX: 0
+  maximumX: 360
+  minimumY: -60
+  maximumY: 60
 --- !u!1 &1881245574
 GameObject:
   m_ObjectHideFlags: 0

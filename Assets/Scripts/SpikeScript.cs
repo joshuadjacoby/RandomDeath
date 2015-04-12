@@ -107,8 +107,9 @@ public class SpikeScript : MonoBehaviour {
     }
 
     void OnTriggerEnter(Collider col) {
-        if (col.gameObject.tag == "Player") {
+        if (col.gameObject.tag == "Player" || col.gameObject.tag == "Zambie") {
             col.gameObject.BroadcastMessage("ApplyDamage", damage);
+            Debug.Log("RIP");
         }
     }
 }
