@@ -27,6 +27,9 @@ public class LevelLoader : MonoBehaviour {
     private const int CRATE = 2;
     private const int SPIKES = 3;
 
+    private Object spikes;
+
+
     // Use this for initialization
     void Start() {
         // load all levels
@@ -41,6 +44,9 @@ public class LevelLoader : MonoBehaviour {
         mat.SetTexture(0, atlas);
 
         GetComponent<MeshRenderer>().material = mat;
+
+
+        spikes = Resources.Load("prefabs/spikes");
 
         LoadLevel();
 
@@ -150,22 +156,22 @@ public class LevelLoader : MonoBehaviour {
                 switch (tiles[x, y]) {
 
                     case 0:
-
                         break;
                     case 1:
                         break;
                     case 2:
                         break;
                     case 3:
-                        GameObject go = new GameObject("spikes");
-                        go.transform.position = new Vector3(x + .5f, .5f, y + .5f);
-                        BoxCollider box = go.AddComponent<BoxCollider>();
-                        box.size = Vector3.one * .5f;
-                        box.isTrigger = true;
-                        go.AddComponent<SpikeScript>();
-
-
+                        GameObject go = (GameObject)Instantiate(spikes, new Vector3(x + .5f, .5f, y + .5f), Quaternion.identity);
+                        go.name = "Spikes";
                         go.transform.parent = things.transform;
+                        break;
+
+                    case 4:
+                        go = (GameObject)Instantiate(spikes, new Vector3(x + .5f, .5f, y + .5f), Quaternion.identity);
+                        go.name = "Spikes";
+                        go.transform.parent = things.transform;
+
 
                         break;
                     default:
