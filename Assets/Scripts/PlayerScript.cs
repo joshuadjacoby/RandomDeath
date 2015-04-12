@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 public class PlayerScript : MonoBehaviour
 {
@@ -9,7 +10,7 @@ public class PlayerScript : MonoBehaviour
     public bool slow;
     public float slowTimer;
     public Vector3 start;
-    public float mouseSensitivity = 20f;
+    public float mouseSensitivity = 200f;
 
     // Use this for initialization
     void Start()
@@ -58,9 +59,7 @@ public class PlayerScript : MonoBehaviour
         if (health <= 0)
             gameObject.SetActive(false);
 
-
-        //float rot = Input.GetAxis("Horizontal") * mouseSensitivity * Time.deltaTime;
-        transform.Rotate(Input.GetAxis("rVertical") * mouseSensitivity * Time.deltaTime, Input.GetAxis("rHorizontal") * mouseSensitivity * Time.deltaTime, 0);
+        transform.Rotate(0, Input.GetAxis("Mouse X") == 0 ? Input.GetAxis("Right Horizontal")*5 : Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime, 0);
     }
 
     // Update is called once per frame
