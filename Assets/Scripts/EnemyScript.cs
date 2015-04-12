@@ -28,7 +28,7 @@ public class EnemyScript : MonoBehaviour {
 
 		// RS: fighting
 		isAgro = false;
-		agroRange = 3.0f;
+		agroRange = 5.0f;
 		damage = 1;
         health = 2;
 
