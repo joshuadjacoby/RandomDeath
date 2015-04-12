@@ -1,35 +1,49 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PlayerScript : MonoBehaviour {
+public class PlayerScript : MonoBehaviour
+{
     public int health;
     private Rigidbody r;
     public bool canMove;
+    public bool slow;
+    public float slowTimer;
     public Vector3 start;
 
     // Use this for initialization
-    void Start() {
+    void Start()
+    {
         health = 1;
         r = GetComponent<Rigidbody>();
         canMove = true;
+        slow = false;
+        slowTimer = 3.0f;
         start = transform.position;
     }
 
-	void ApplyDamage(int i) {
-		health -= i;
-	}
+    void ApplyDamage(int i)
+    {
+        health -= i;
+    }
 
     void toggleTrap()
     {
         canMove = !canMove;
     }
 
-	void ZeroHealth() {
-		health = 0;
-	}
+    void toggleSlow()
+    {
+        slow = !slow;
+    }
+
+    void ZeroHealth()
+    {
+        health = 0;
+    }
 
 
-    public void ResetPlayer() {
+    public void ResetPlayer()
+    {
         health = 1;
         canMove = true;
         transform.position = start;
@@ -37,7 +51,8 @@ public class PlayerScript : MonoBehaviour {
     }
 
 
-    void Update() {
+    void Update()
+    {
         if (health <= 0)
             gameObject.SetActive(false);
     }
@@ -49,10 +64,22 @@ public class PlayerScript : MonoBehaviour {
         {
             float speed = 2.0f;
 
+            if (slow && slowTimer > 0)
+            {
+                speed *= .3f;
+                slowTimer -= Time.deltaTime;
+                Debug.Log(slowTimer);
+            }
+            else if (slow && slowTimer <= 0)
+            {
+                slow = false;
+                slowTimer = 3.0f;
+            }
+
             float x = Input.GetAxis("Horizontal");
             float y = Input.GetAxis("Vertical");
 
-            r.velocity = new Vector3(x * speed, 0, y*speed);
+            r.velocity = new Vector3(x * speed, 0, y * speed);
         }
         else
         {
