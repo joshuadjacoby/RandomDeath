@@ -94,7 +94,7 @@ public class LevelLoader : MonoBehaviour {
         tilesGameObject.transform.localScale = new Vector3(1/tileSize, 1/tileSize, 1/tileSize);
     }
 
-    public void sendToDungeon(GameObject a)
+    public void sendToDungeon()
     {
         
     }
@@ -103,9 +103,11 @@ public class LevelLoader : MonoBehaviour {
 	void Update () {
         if (Input.GetKey(KeyCode.R)) {
             player.transform.position = playerStart;
-            PlayerScript.health = 1;
+<<<<<<< HEAD
+=======
+            //PlayerScript.health = 1;
+>>>>>>> 73e475d2f5d31b1325fa48b4575600435de6dc28
             player.SetActive(true);
-
         }
 	}
 }
