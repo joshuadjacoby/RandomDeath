@@ -53,14 +53,16 @@ public class LevelLoader : MonoBehaviour {
         bearTrap = Resources.Load("prefabs/bear trap");
         trapdoor = Resources.Load("prefabs/trapdoor");
         
-        LoadLevel();
+		string l = "Levels/level1"; 
+
+        LoadLevel(l);
 
 
     }
 
-    private void LoadLevel() {
+    public void LoadLevel(string level) {
 
-        Texture2D tex = (Texture2D)Resources.Load("levels/level1");
+		Texture2D tex = (Texture2D)Resources.Load(level);
         Color32[] colors = tex.GetPixels32();
 
         Dictionary<Color32, int> table = new Dictionary<Color32, int>();
@@ -208,9 +210,10 @@ public class LevelLoader : MonoBehaviour {
         if (index == 1) {
             index = Random.value < .2 ? 7 : 1;
         }
-
+		Debug.Log ("HEY2");
         Rect r = rects[index];
-
+		Debug.Log ("HEY3");
+	
         //uvs.Add(new Vector2(r.xMin+.001f, r.yMax-.001f));
         //uvs.Add(new Vector2(r.xMin+.001f, r.yMin+.001f));
         //uvs.Add(new Vector2(r.xMax-.001f, r.yMin+.001f));
