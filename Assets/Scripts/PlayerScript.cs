@@ -59,8 +59,8 @@ public class PlayerScript : MonoBehaviour
             gameObject.SetActive(false);
 
 
-        float rot = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
-        transform.Rotate(0, rot, 0);
+        //float rot = Input.GetAxis("Horizontal") * mouseSensitivity * Time.deltaTime;
+        transform.Rotate(Input.GetAxis("rVertical") * mouseSensitivity * Time.deltaTime, Input.GetAxis("rHorizontal") * mouseSensitivity * Time.deltaTime, 0);
     }
 
     // Update is called once per frame
