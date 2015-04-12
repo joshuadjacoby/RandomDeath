@@ -168,9 +168,7 @@ public class LevelLoader : MonoBehaviour {
                         break;
 
                     case 4:
-                        go = (GameObject)Instantiate(spikes, new Vector3(x + .5f, .5f, y + .5f), Quaternion.identity);
-                        go.name = "Spikes";
-                        go.transform.parent = things.transform;
+
 
 
                         break;
