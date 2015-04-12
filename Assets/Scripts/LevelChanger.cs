@@ -13,15 +13,11 @@ public class LevelChanger : MonoBehaviour {
         l = GameObject.Find("Level").GetComponent<LevelLoader>();
 	}
 
-	void Update()
-	{
-	}
-
 	void OnTriggerEnter(Collider col)
 	{
 		if (col.gameObject.tag == "Player") {
             l.loadNextLevel();
-
+            Destroy(this);
 		}
 	}
 

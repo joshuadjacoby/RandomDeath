@@ -35,6 +35,7 @@ public class LevelLoader : MonoBehaviour {
     private Object spikes;
     private Object bearTrap;
     private Object exit;
+    private Object zombie;
 
 
     // Use this for initialization
@@ -56,23 +57,30 @@ public class LevelLoader : MonoBehaviour {
         spikes = Resources.Load("prefabs/spikes");
         bearTrap = Resources.Load("prefabs/bear trap");
         exit = Resources.Load("prefabs/exit");
+        zombie = Resources.Load("prefabs/zombie");
 
-        LoadLevel("Levels/level1");
+        LoadLevel();
 
 
     }
 
     public void loadNextLevel() {
-        Destroy(mesh);
-        Destroy(GameObject.Find("things"));
-
-        LoadLevel("Levels/level" + ++currentLevel);
-
+        ++currentLevel;
+        LoadLevel();
     }
 
-    public void LoadLevel(string level) {
+    private void LoadLevel() {
+        if (mesh != null) {
+            Destroy(mesh);
+        }
 
-		Texture2D tex = (Texture2D)Resources.Load(level);
+        GameObject findThings = GameObject.Find("things");
+        if (findThings != null) {
+            Destroy(findThings);
+        }
+
+
+		Texture2D tex = (Texture2D)Resources.Load("Levels/level" + currentLevel);
         Color32[] colors = tex.GetPixels32();
 
         Dictionary<Color32, int> table = new Dictionary<Color32, int>();
@@ -195,7 +203,9 @@ public class LevelLoader : MonoBehaviour {
                         break;
 
                     case SPAWN_ENEMY:
-
+                        go = (GameObject)Instantiate(zombie, new Vector3(x + .5f, 0, y + .5f), Quaternion.identity);
+                        go.name = "Zambie";
+                        go.transform.parent = things.transform;
                         break;
 
                     case ENTRANCE:
@@ -233,12 +243,8 @@ public class LevelLoader : MonoBehaviour {
     }
 
     public void addUvsTris(int index) {
-        Debug.Log(rects.Length);
         if (index == WALL) {
             index = Random.value < .2 ? 9 : WALL;
-        }
-        if (index == SPAWN_ENEMY) {
-            index = GROUND;
         }
 
         Rect r = rects[index];
@@ -275,7 +281,8 @@ public class LevelLoader : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        if (Input.GetKey(KeyCode.R)) {
+        if (Input.GetKeyDown(KeyCode.R)) {
+            LoadLevel();
             player.ResetPlayer();
         }
     }
