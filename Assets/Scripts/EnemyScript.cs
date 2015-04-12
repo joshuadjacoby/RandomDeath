@@ -27,7 +27,7 @@ public class EnemyScript : MonoBehaviour {
 
 		// RS: fighting
 		isAgro = false;
-		agroRange = 5.0f;
+		agroRange = 3.0f;
 		damage = 1;
 
 		// RS: Movement stuff
@@ -46,18 +46,20 @@ public class EnemyScript : MonoBehaviour {
 		speed = 15.0f;
 	}
 
-	private bool oneSec() {
-		return false;
+	bool checkForPlayer () {
+		RaycastHit hit;
+		if (Physics.Raycast (transform.position, transform.forward, out hit, agroRange))
+			return hit.collider.tag == "Player";
+		else 
+		    return false;    	
+		//return Vector2.Distance (player.transform.position, transform.position) < agroRange;
 	}
 
 	// Update is called once per frame
 	void Update () {
 		float step = speed * Time.deltaTime;
 		if (!isAgro) {
-			if(Vector2.Distance (player.transform.position, transform.position) < agroRange) {
-				isAgro = true;
-				wandering = false;
-			}
+			isAgro = checkForPlayer();
 			/*
 			if (!isAgro && !wandering && oneSec()) {
 				switch (direction) {
@@ -96,7 +98,6 @@ public class EnemyScript : MonoBehaviour {
 			
 			r.velocity = new Vector3(step * xMove, 0, step * yMove);
 		}
-		//transform.position = Vector2.MoveTowards (transform.position, player.transform.position, step);
 	}
 
 	void OnCollisionEnter (Collision col) {
