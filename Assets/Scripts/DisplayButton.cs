@@ -72,40 +72,27 @@ public class DisplayButton : MonoBehaviour {
 	// Update is called once per frame
 	void Update()
 	{
-		//Debug.Log (name);
-		//if (count == 1 && i < 6 && BearTrapScript.inTrap == true) {
 		if (i < 6 && TrapdoorScript.inTrap == true) {
 
 
 			if (key [i] == 'A') {
-				//Debug.Log("in1");
-				//Ar.transform.position = new Vector3(1,1,1);
-
-				//g.transform.GetChild(0).gameObject.SetActive(true);
 				Ar.enabled = true;
 
 				if (Input.GetKeyDown (KeyCode.A) || Input.GetButtonDown("Fire1")) {
 					i++;
 					Ar.enabled = false;
-					//g.transform.GetChild(0).gameObject.SetActive(false);
-
+			
 				}
 
 			} else if (key [i] == 'B') {
 
-				//g.transform.GetChild(1).gameObject.SetActive(true);
-
 				Br.enabled = true;
 				if (Input.GetKeyDown (KeyCode.B) || Input.GetButtonDown("Fire2")) {
 					i++;
-					//g.transform.GetChild(1).gameObject.SetActive(false);
 					Br.enabled = false;
 				}
 
 			} else if (key [i] == 'X') {
-
-
-				//g.transform.GetChild(2).gameObject.SetActive(true);
 
 				Xr.enabled = true;
 				if (Input.GetKeyDown (KeyCode.X) || Input.GetButtonDown("Fire3")) {
@@ -130,11 +117,15 @@ public class DisplayButton : MonoBehaviour {
 
 		if (i == 6) {
 
-			c.gameObject.BroadcastMessage("toggleTrap");
+			// DOOR UNLOCKED
+
+
+
+			//c.gameObject.BroadcastMessage("toggleTrap");
 			//gameObject.SetActive(false);
 			//g.SetActive(false);
 			//tempr.enabled = true;
-			isLocked = false;
+			//isLocked = false;
 			i=0;
 			TrapdoorScript.inTrap = false;
 		}
