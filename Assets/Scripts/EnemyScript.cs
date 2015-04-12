@@ -9,18 +9,21 @@ public class EnemyScript : MonoBehaviour {
 	private float agroRange; // RS: cannot be de-agro'ed
 	private int damage;
 
+	/*
 	private float lastWalk; // RS: last time zombie finished walking
 	private float walkTime;
 	private float walkCD;
-	private float speed;
 	private int direction;
 	private float distance;
 	private bool wandering;
 	private Vector2 startingPlace;
+	*/
+	private float speed;
 
 	// Use this for initialization
 	void Start () {
 		player = GameObject.Find ("Player");
+		r = GetComponent<Rigidbody2D> ();
 
 		// RS: fighting
 		isAgro = false;
@@ -28,19 +31,21 @@ public class EnemyScript : MonoBehaviour {
 		damage = 1;
 
 		// RS: Movement stuff
+		/*
 		startingPlace = transform.position;
-		speed = 15.0f;
 		wandering = false;
 		direction = Random.Range (-4, 4);
 		distance = Random.Range (1, 5);
-		r = GetComponent<Rigidbody2D> ();
 		walkCD = 1;
 		lastWalk = Time.time;
+		*/
+		speed = 15.0f;
 	}
-
+	/*
 	private bool WalkTime() {
 		return Time.time - lastWalk >= walkCD;
 	}
+	*/
 
 	// Update is called once per frame
 	void Update () {
