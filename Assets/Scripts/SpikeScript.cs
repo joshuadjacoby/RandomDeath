@@ -7,8 +7,11 @@ public class SpikeScript : MonoBehaviour {
     private Transform player;
     private Transform mesh;
 
-    Vector3 localBottom;
-    Vector3 localLowerPoke;
+    private Vector3 localBottom;
+    private Vector3 localLowerPoke;
+    private Vector3 localFullPoke;
+    private bool fullPoke = false;
+    private float fullPokeTimer = 0f;
 
     // Use this for initialization
     void Start() {
@@ -78,7 +81,7 @@ public class SpikeScript : MonoBehaviour {
         uvs[23] = new Vector2(0, 0);
 
         int[] tris = new int[attribs];
-        for(int i = 0; i < attribs; i++){
+        for (int i = 0; i < attribs; i++) {
             tris[i] = i;
         }
 
@@ -94,22 +97,42 @@ public class SpikeScript : MonoBehaviour {
 
         localBottom = new Vector3(mesh.localPosition.x, -1.2f, mesh.localPosition.z);
         localLowerPoke = new Vector3(mesh.localPosition.x, -1.05f, mesh.localPosition.z);
+        localFullPoke = new Vector3(mesh.localPosition.x, -.5f, mesh.localPosition.z);
 
     }
 
     void Update() {
-        float sqrMag = (transform.position - player.position).sqrMagnitude;
-        if (sqrMag < 2 * 2) {
-            mesh.localPosition = Vector3.Lerp(mesh.localPosition, localLowerPoke, .1f);
+        //float sqrMag = (transform.position - player.position).sqrMagnitude;
+        Collider[] colliders = Physics.OverlapSphere(transform.position, 1.5f);
+        bool pokeout = false;
+        for (int i = 0; i < colliders.Length; i++) {
+            if (colliders[i].tag == "Player" || colliders[i].tag == "Zambie") {
+                pokeout = true;
+            }
+        }
+
+        if (fullPoke) {
+            fullPokeTimer -= Time.deltaTime;
+            if (fullPokeTimer < 0f) {
+                fullPoke = false;
+            }
+
+            mesh.localPosition = Vector3.Lerp(mesh.localPosition, localFullPoke, .5f);
+
         } else {
-            mesh.localPosition = Vector3.Lerp(mesh.localPosition, localBottom, .1f);
+            if (pokeout) {
+                mesh.localPosition = Vector3.Lerp(mesh.localPosition, localLowerPoke, .1f);
+            } else {
+                mesh.localPosition = Vector3.Lerp(mesh.localPosition, localBottom, .1f);
+            }
         }
     }
 
     void OnTriggerEnter(Collider col) {
         if (col.gameObject.tag == "Player" || col.gameObject.tag == "Zambie") {
             col.gameObject.BroadcastMessage("ApplyDamage", damage);
-            Debug.Log("RIP");
+            fullPokeTimer = 2f;
+            fullPoke = true;
         }
     }
 }
