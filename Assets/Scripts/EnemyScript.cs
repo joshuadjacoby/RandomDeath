@@ -17,7 +17,7 @@ public class EnemyScript : MonoBehaviour {
 	*/
 	private int direction;
 	private float distance;
-	private Vector3 startingPlace;
+	private Vector3 lastSeen;
 	private bool wandering;
 	private float speed;
 
@@ -33,19 +33,11 @@ public class EnemyScript : MonoBehaviour {
         health = 2;
 
 		// RS: Movement stuff
-		/*
-		startingPlace = transform.position;
-		direction = Random.Range (-4, 4);
-		distance = Random.Range (1, 5);
-		walkCD = 1;
-		lastWalk = Time.time;
-		*/
-		startingPlace = transform.position;
+		lastSeen = player.transform.position;
 		direction = Random.Range (-2, 4);
 		distance = Random.Range (0.5f, 3.0f);
-		startingPlace = transform.position;
 		wandering = false;
-		speed = 15.0f;
+		speed = 0.90f;
 	}
 
 	bool checkForPlayer () {
@@ -54,7 +46,6 @@ public class EnemyScript : MonoBehaviour {
 			return hit.collider.tag == "Player";
 		else 
 		    return false;    	
-		//return Vector2.Distance (player.transform.position, transform.position) < agroRange;
 	}
 
     void ApplyDamage(int i)
@@ -71,9 +62,20 @@ public class EnemyScript : MonoBehaviour {
 		if (!isAgro)
 			isAgro = checkForPlayer();
 		else {
-			float xMove = player.transform.position.x - transform.position.x;
-			float yMove = player.transform.position.z - transform.position.z;
-			r.velocity = new Vector3(step * xMove, 0, step * yMove);
+            RaycastHit see;
+            float xMove;
+            float yMove;
+            if(Physics.Raycast (transform.position, transform.forward, out see) 
+                && see.collider.tag == "Player"){
+			    xMove = player.transform.position.x - transform.position.x;
+			    yMove = player.transform.position.z - transform.position.z;
+                lastSeen = player.transform.position;
+            }
+            else {
+                xMove = lastSeen.x - transform.position.x;
+                yMove = lastSeen.z - transform.position.z;
+            }
+            r.velocity = Vector3.Normalize(new Vector3(step * xMove, 0, step * yMove));
 		}
 	}
 

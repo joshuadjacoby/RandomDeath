@@ -3,8 +3,7 @@ using System.Collections;
 
 public class BearTrapScript : MonoBehaviour
 {
-
-    float timer = 5.0f;
+	float timer = 5.0f;
     bool timerOn;
     bool isEnabled;
     // Use this for initialization
@@ -31,7 +30,8 @@ public class BearTrapScript : MonoBehaviour
     {
         if (col.gameObject.tag == "Player" /*&& isEnabled*/)
         {
-            col.gameObject.BroadcastMessage("toggleSlow");
+			col.gameObject.BroadcastMessage("toggleSlow");
+
             //col.gameObject.transform.position = Vector3.MoveTowards(col.gameObject.transform.position, transform.position, 1);
             //timerOn = true;
         }
