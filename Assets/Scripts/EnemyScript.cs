@@ -37,7 +37,7 @@ public class EnemyScript : MonoBehaviour {
 		direction = Random.Range (-2, 4);
 		distance = Random.Range (0.5f, 3.0f);
 		wandering = false;
-		speed = 20.0f;
+		speed = 0.90f;
 	}
 
 	bool checkForPlayer () {
@@ -65,7 +65,7 @@ public class EnemyScript : MonoBehaviour {
             RaycastHit see;
             float xMove;
             float yMove;
-            if(Physics.Raycast (transform.position, player.transform.position, out see) 
+            if(Physics.Raycast (transform.position, transform.forward, out see) 
                 && see.collider.tag == "Player"){
 			    xMove = player.transform.position.x - transform.position.x;
 			    yMove = player.transform.position.z - transform.position.z;
@@ -75,7 +75,7 @@ public class EnemyScript : MonoBehaviour {
                 xMove = lastSeen.x - transform.position.x;
                 yMove = lastSeen.z - transform.position.z;
             }
-            r.velocity = new Vector3(step * xMove, 0, step * yMove);
+            r.velocity = Vector3.Normalize(new Vector3(step * xMove, 0, step * yMove));
 		}
 	}
 
