@@ -10,11 +10,18 @@ public class PlayerScript : MonoBehaviour
     private bool slow;
     private float slowTimer;
     public Vector3 start;
+<<<<<<< HEAD
     private float mouseSensitivity;
     private bool canSprint;
     private bool isSprinting;
     private float sprintTimer;
     private float sprintCooldown;
+=======
+    public float mouseSensitivity = 300f;
+    public float controllerSensitivity = 300f;
+    private float verticleLook;
+    private Transform cameraTransform;
+>>>>>>> b6608ed2c6adc805e7e9833d633b4e4a7cc1d0f1
 
     // Use this for initialization
     void Start()
@@ -26,11 +33,15 @@ public class PlayerScript : MonoBehaviour
         slowTimer = 3.0f;
         start = transform.position;
         Cursor.lockState = CursorLockMode.Locked;
+<<<<<<< HEAD
         mouseSensitivity = 200f;
         canSprint = true;
         isSprinting = false;
         sprintTimer = 2.0f;
         sprintCooldown = 4.0f;
+=======
+        cameraTransform = transform.Find("MainCamera").transform;
+>>>>>>> b6608ed2c6adc805e7e9833d633b4e4a7cc1d0f1
     }
 
     void ApplyDamage(int i)
@@ -68,7 +79,17 @@ public class PlayerScript : MonoBehaviour
         if (health <= 0)
             gameObject.SetActive(false);
 
-        transform.Rotate(0, Input.GetAxis("Mouse X") == 0 ? Input.GetAxis("Right Horizontal")*5 : Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime, 0);
+        float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
+        float controllerX = Input.GetAxis("Right Horizontal") * controllerSensitivity * Time.deltaTime;
+
+        float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
+        float controllerY = Input.GetAxis("Right Vertical") * controllerSensitivity * Time.deltaTime;
+
+        float rot = mouseX == 0 ? controllerX : mouseX;
+        verticleLook -= mouseY == 0 ? controllerY : mouseY;
+        verticleLook = Mathf.Clamp(verticleLook, -80f, 80f);
+        cameraTransform.localRotation = Quaternion.Euler(verticleLook, 0, 0);
+        transform.Rotate(0, rot, 0);
     }
 
     // Update is called once per frame
