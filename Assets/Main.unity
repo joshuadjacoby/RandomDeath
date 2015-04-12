@@ -146,7 +146,7 @@ Rigidbody:
   m_Mass: 1
   m_Drag: 0
   m_AngularDrag: .0500000007
-  m_UseGravity: 0
+  m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 112
@@ -399,16 +399,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80cf6df50825e5f45ae1f37d8a8ae0e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentLevel: 0
   numberOfLevels: 0
   textures:
   - {fileID: 2800000, guid: beed566e3dccff548afa8beec4c32216, type: 3}
   - {fileID: 2800000, guid: 12c3e6870e2ca6048828ba0b3ac5ad32, type: 3}
-  - {fileID: 2800000, guid: c8daafec743158743b547da7a3d4f2de, type: 3}
   - {fileID: 2800000, guid: f824950ebf5b211409feaa6630e7c3b0, type: 3}
+  - {fileID: 2800000, guid: c8daafec743158743b547da7a3d4f2de, type: 3}
   - {fileID: 2800000, guid: 32e6b4dd8326a98408f60dbc4b5edd73, type: 3}
   - {fileID: 2800000, guid: f55a788a7af3a97408796a6cb3131dab, type: 3}
-  - {fileID: 2800000, guid: ef5c29c6edceff64fb8dd1a3bbc5fb87, type: 3}
+  - {fileID: 2800000, guid: beed566e3dccff548afa8beec4c32216, type: 3}
+  - {fileID: 2800000, guid: 6b23a48f21e3d684cbabb2ee210a8857, type: 3}
+  - {fileID: 2800000, guid: 38e6ed040f0feda419d1501a05a1100c, type: 3}
   - {fileID: 2800000, guid: ef5c29c6edceff64fb8dd1a3bbc5fb87, type: 3}
   atlas: {fileID: 0}
   rects: []

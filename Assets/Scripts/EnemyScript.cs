@@ -92,14 +92,14 @@ public class EnemyScript : MonoBehaviour {
 			} */
 		} else {
 			float xMove = player.transform.position.x - transform.position.x;
-			float yMove = player.transform.position.y - transform.position.y;
+			float yMove = player.transform.position.z - transform.position.z;
 			
 			r.velocity = new Vector3(step * xMove, 0, step * yMove);
 		}
 		//transform.position = Vector2.MoveTowards (transform.position, player.transform.position, step);
 	}
 
-	void OnCollisionEnter2D (Collision2D col) {
+	void OnCollisionEnter (Collision col) {
 		if (col.gameObject.tag == "Player")
 			col.gameObject.BroadcastMessage ("ApplyDamage" , damage);
 	}

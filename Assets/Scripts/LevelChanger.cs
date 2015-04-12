@@ -4,26 +4,20 @@ using UnityEngine.UI;
 
 public class LevelChanger : MonoBehaviour {
 
-	private LevelLoader l =  new LevelLoader();
+    private LevelLoader l;
 
 	private string level;
 
 	void Start()
 	{
-		//l = GameObject.FindGameObjectWithTag ("Level");
-	}
-
-	void Update()
-	{
+        l = GameObject.Find("Level").GetComponent<LevelLoader>();
 	}
 
 	void OnTriggerEnter(Collider col)
 	{
 		if (col.gameObject.tag == "Player") {
-			Debug.Log ("HEY");
-			//level = "levels/level2";
-			l.LoadLevel("levels/level2");
-
+            l.loadNextLevel();
+            Destroy(this);
 		}
 	}
 
