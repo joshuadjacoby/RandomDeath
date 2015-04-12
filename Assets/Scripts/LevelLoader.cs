@@ -24,13 +24,18 @@ public class LevelLoader : MonoBehaviour {
     // ids that correspond to the .png level reader
     private const int GROUND = 0;
     private const int WALL = 1;
-    private const int CRATE = 2;
-    private const int SPIKES = 3;
+    private const int SPIKES = 2;
+    private const int CRATE = 3;
     private const int BEAR_TRAP = 4;
+    private const int LOCKED_DOOR = 5;
+    private const int SPAWN_ENEMY = 6;
+    private const int ENTRANCE = 7;
+    private const int EXIT = 8;
 
     private Object spikes;
     private Object bearTrap;
-    private Object trapdoor;
+   
+    
 
 
     // Use this for initialization
@@ -51,7 +56,6 @@ public class LevelLoader : MonoBehaviour {
 
         spikes = Resources.Load("prefabs/spikes");
         bearTrap = Resources.Load("prefabs/bear trap");
-        trapdoor = Resources.Load("prefabs/trapdoor");
         
         LoadLevel();
 
@@ -160,29 +164,39 @@ public class LevelLoader : MonoBehaviour {
                 // this is where you can spawn certain prefabs based on what tile you are
                 switch (tiles[x, y]) {
 
-                    case 0:
+                    case GROUND:
                         break;
-                    case 1:
+                    case WALL:
                         break;
-                    case 2:
-                        break;
-                    case 3:
+                    case SPIKES:
                         GameObject go = (GameObject)Instantiate(spikes, new Vector3(x + .5f, .5f, y + .5f), Quaternion.identity);
                         go.name = "Spikes";
                         go.transform.parent = things.transform;
                         break;
+                    case CRATE:
+                        break;
 
-                    case 4:
+                    case BEAR_TRAP:
                         go = (GameObject)Instantiate(bearTrap, new Vector3(x + .5f, .5f, y + .5f), Quaternion.identity);
                         go.name = "Bear Trap";
                         go.transform.parent = things.transform;
                         break;
 
-                    case 5:
-                        go = (GameObject)Instantiate(trapdoor, new Vector3(x + .5f, .5f, y + .5f), Quaternion.identity);
-                        go.name = "Trapdoor";
-                        go.transform.parent = things.transform;
+                    case LOCKED_DOOR:
+
                         break;
+
+                    case SPAWN_ENEMY:
+
+                        break;
+
+                    case ENTRANCE:
+
+                        break;
+
+                    case EXIT:
+                        break;
+
                     default:
                         break;
 
@@ -205,18 +219,11 @@ public class LevelLoader : MonoBehaviour {
     }
 
     public void addUvsTris(int index) {
-        if (index == 1) {
-            index = Random.value < .2 ? 7 : 1;
+        if (index == WALL) {
+            index = Random.value < .2 ? 9 : WALL;
         }
 
         Rect r = rects[index];
-
-        //uvs.Add(new Vector2(r.xMin+.001f, r.yMax-.001f));
-        //uvs.Add(new Vector2(r.xMin+.001f, r.yMin+.001f));
-        //uvs.Add(new Vector2(r.xMax-.001f, r.yMin+.001f));
-        //uvs.Add(new Vector2(r.xMax-.001f, r.yMin+.001f));
-        //uvs.Add(new Vector2(r.xMax-.001f, r.yMax-.001f));
-        //uvs.Add(new Vector2(r.xMin+.001f, r.yMax-.001f));
 
         uvs.Add(new Vector2(r.xMin , r.yMax ));
         uvs.Add(new Vector2(r.xMin , r.yMin ));
