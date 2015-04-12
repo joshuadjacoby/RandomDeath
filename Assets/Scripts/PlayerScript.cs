@@ -10,7 +10,10 @@ public class PlayerScript : MonoBehaviour
     public bool slow;
     public float slowTimer;
     public Vector3 start;
-    public float mouseSensitivity = 200f;
+    public float mouseSensitivity = 300f;
+    public float controllerSensitivity = 300f;
+    private float verticleLook;
+    private Transform cameraTransform;
 
     // Use this for initialization
     void Start()
@@ -22,6 +25,7 @@ public class PlayerScript : MonoBehaviour
         slowTimer = 3.0f;
         start = transform.position;
         Cursor.lockState = CursorLockMode.Locked;
+        cameraTransform = transform.Find("MainCamera").transform;
     }
 
     void ApplyDamage(int i)
@@ -59,7 +63,17 @@ public class PlayerScript : MonoBehaviour
         if (health <= 0)
             gameObject.SetActive(false);
 
-        transform.Rotate(0, Input.GetAxis("Mouse X") == 0 ? Input.GetAxis("Right Horizontal")*5 : Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime, 0);
+        float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
+        float controllerX = Input.GetAxis("Right Horizontal") * controllerSensitivity * Time.deltaTime;
+
+        float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
+        float controllerY = Input.GetAxis("Right Vertical") * controllerSensitivity * Time.deltaTime;
+
+        float rot = mouseX == 0 ? controllerX : mouseX;
+        verticleLook -= mouseY == 0 ? controllerY : mouseY;
+        verticleLook = Mathf.Clamp(verticleLook, -80f, 80f);
+        cameraTransform.localRotation = Quaternion.Euler(verticleLook, 0, 0);
+        transform.Rotate(0, rot, 0);
     }
 
     // Update is called once per frame

@@ -177,8 +177,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   axes: 1
-  sensitivityX: 15
-  sensitivityY: 0
+  sensitivityX: 10
+  sensitivityY: 10
   minimumX: -360
   maximumX: 360
   minimumY: 0
