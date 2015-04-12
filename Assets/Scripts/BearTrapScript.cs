@@ -20,7 +20,6 @@ public class BearTrapScript : MonoBehaviour
         if (timerOn && timer > 0)
         {
             timer -= Time.deltaTime;
-            Debug.Log(timer);
         }
         if (timer <= 0)
         {
@@ -38,7 +37,6 @@ public class BearTrapScript : MonoBehaviour
             if (Input.GetKey("space") || Input.GetButtonDown("Fire1") || Input.GetButtonUp("Fire1"))
             {
                 timer -= 0.05f;
-                Debug.Log("YAY");
             }
         }
         else

@@ -4,21 +4,23 @@ using System.Collections;
 public class PlayerScript : MonoBehaviour
 {
     public int health;
-    private Rigidbody2D r;
+    private Rigidbody r;
     public bool canMove;
     public bool slow;
     public float slowTimer;
     public Vector3 start;
+    public float mouseSensitivity = 20f;
 
     // Use this for initialization
     void Start()
     {
         health = 1;
-        r = GetComponent<Rigidbody2D>();
+        r = GetComponent<Rigidbody>();
         canMove = true;
         slow = false;
         slowTimer = 3.0f;
         start = transform.position;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     void ApplyDamage(int i)
@@ -55,6 +57,10 @@ public class PlayerScript : MonoBehaviour
     {
         if (health <= 0)
             gameObject.SetActive(false);
+
+
+        float rot = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
+        transform.Rotate(0, rot, 0);
     }
 
     // Update is called once per frame
@@ -79,7 +85,8 @@ public class PlayerScript : MonoBehaviour
             float x = Input.GetAxis("Horizontal");
             float y = Input.GetAxis("Vertical");
 
-            r.velocity = new Vector3(x * speed, y * speed, 0);
+            r.velocity = transform.TransformDirection(new Vector3(x * speed, 0, y * speed));
+            
         }
         else
         {

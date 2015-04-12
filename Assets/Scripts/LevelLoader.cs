@@ -39,7 +39,7 @@ public class LevelLoader : MonoBehaviour {
         player = GameObject.Find("Player").GetComponent<PlayerScript>();
 
         atlas = new Texture2D(1024, 1024);
-        rects = atlas.PackTextures(textures, 0, 1024);
+        rects = atlas.PackTextures(textures, 2, 1024);
         atlas.filterMode = FilterMode.Point;
         atlas.wrapMode = TextureWrapMode.Clamp;
 
