@@ -8,6 +8,7 @@ public class EnemyScript : MonoBehaviour {
 	private bool isAgro;
 	private float agroRange; // RS: cannot be de-agro'ed
 	private int damage;
+    private int health;
 
 	/*
 	private float lastWalk; // RS: last time zombie finished walking
@@ -29,6 +30,7 @@ public class EnemyScript : MonoBehaviour {
 		isAgro = false;
 		agroRange = 3.0f;
 		damage = 1;
+        health = 2;
 
 		// RS: Movement stuff
 		/*
@@ -55,47 +57,22 @@ public class EnemyScript : MonoBehaviour {
 		//return Vector2.Distance (player.transform.position, transform.position) < agroRange;
 	}
 
+    void ApplyDamage(int i)
+    {
+        health -= i;
+    }
+
 	// Update is called once per frame
 	void Update () {
-		float step = speed * Time.deltaTime;
-		if (!isAgro) {
-			isAgro = checkForPlayer();
-			/*
-			if (!isAgro && !wandering && oneSec()) {
-				switch (direction) {
-					
-				case 0: // RS: Move up
-					r.velocity = new Vector3 (0, 0, step);
-					wandering = true;
-					break;
-				case 1: // RS: Move left
-					r.velocity = new Vector3 (-step, 0, 0);
-					wandering = true;
-					break;
-				case 2: // RS: Move down
-					r.velocity = new Vector3 (0, 0, -step);
-					wandering = true;
-					break;
-				case 3: // RS: Move right
-					r.velocity = new Vector3 (step, 0, 0);
-					wandering = true;
-					break;
-				default:
-					break;
+        if (health <= 0)
+            Destroy(gameObject);
 
-					startingPlace = transform.position;
-				}
-				
-			} else if (wandering) {
-				if (Vector2.Distance (transform.position, startingPlace)>= distance) {
-					wandering = false;
-					r.velocity = new Vector3(0, 0, 0);
-				}
-			} */
-		} else {
+		float step = speed * Time.deltaTime;
+		if (!isAgro)
+			isAgro = checkForPlayer();
+		else {
 			float xMove = player.transform.position.x - transform.position.x;
 			float yMove = player.transform.position.z - transform.position.z;
-			
 			r.velocity = new Vector3(step * xMove, 0, step * yMove);
 		}
 	}
