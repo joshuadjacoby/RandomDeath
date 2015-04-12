@@ -58,7 +58,7 @@ public class EnemyScript : MonoBehaviour {
 				isAgro = true;
 				wandering = false;
 			}
-
+			/*
 			if (!isAgro && !wandering && oneSec()) {
 				switch (direction) {
 					
@@ -89,7 +89,7 @@ public class EnemyScript : MonoBehaviour {
 					wandering = false;
 					r.velocity = new Vector3(0, 0, 0);
 				}
-			} 
+			} */
 		} else {
 			float xMove = player.transform.position.x - transform.position.x;
 			float yMove = player.transform.position.y - transform.position.y;
