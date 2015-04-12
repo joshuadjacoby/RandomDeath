@@ -10,8 +10,8 @@ public class BearTrapScript : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        timerOn = false;
-        isEnabled = true;
+        /*timerOn = false;
+        isEnabled = true;*/
     }
 
     // Update is called once per frame

@@ -91,7 +91,7 @@ public class PlayerScript : MonoBehaviour
     {
         if (canMove)
         {
-			float speed = 1.2f;
+            float speed = 1.2f;
 
             if (slow && slowTimer > 0)
             {
@@ -104,35 +104,40 @@ public class PlayerScript : MonoBehaviour
                 slow = false;
                 slowTimer = 5.0f;
             }
-            if (canSprint && Input.GetKey(KeyCode.LeftShift) || Input.GetButton("Left Analog"))
-            {
-                isSprinting = true;
-            }
-            else if (!canSprint)
-            {
-                sprintCooldown -= Time.deltaTime;
-            }
-            if (isSprinting)
+            if (canSprint && (Input.GetKey(KeyCode.LeftShift) || Input.GetButton("Left Analog")))
             {
                 speed *= 2f;
                 sprintTimer -= Time.deltaTime;
+                isSprinting = true;
+                Debug.Log(sprintTimer);
+            }
+            else
+            {
+                isSprinting = false;
             }
             if (sprintTimer <= 0)
             {
-                isSprinting = false;
-                sprintTimer = 2.0f;
                 canSprint = false;
+            }
+            if (canSprint && sprintTimer < 2f && !isSprinting)
+            {
+                sprintTimer += Time.deltaTime / 2;
             }
             if (sprintCooldown <= 0)
             {
                 canSprint = true;
-                sprintCooldown = 5.0f;
+                sprintCooldown = 5f;
+                sprintTimer = 2f;   
+            }
+            if (!canSprint)
+            {
+                sprintCooldown -= Time.deltaTime;
             }
             float x = Input.GetAxis("Horizontal");
             float y = Input.GetAxis("Vertical");
 
             r.velocity = transform.TransformDirection(new Vector3(x * speed, 0, y * speed));
-            
+
         }
         else
         {

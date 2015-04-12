@@ -31,7 +31,7 @@ public class DoorScript : MonoBehaviour {
 		}
 		tempr = temp.GetComponent<Renderer> ();
 
-		g = GetComponent<GameObject> ();
+		//g = GetComponent<GameObject> ();
 		Ar = A.GetComponent<Renderer> ();
 		Br = B.GetComponent<Renderer> ();
 		Xr = X.GetComponent<Renderer> ();

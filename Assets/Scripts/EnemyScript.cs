@@ -40,10 +40,10 @@ public class EnemyScript : MonoBehaviour {
 		walkCD = 1;
 		lastWalk = Time.time;
 		*/
-		startingPlace = transform.position;
+		//startingPlace = transform.position;
 		direction = Random.Range (-2, 4);
 		distance = Random.Range (0.5f, 3.0f);
-		startingPlace = transform.position;
+		//startingPlace = transform.position;
 		wandering = false;
 		speed = 15.0f;
 	}
