@@ -281,12 +281,8 @@ public class LevelLoader : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-<<<<<<< HEAD
-        if (Input.GetKeyDown(KeyCode.R)) {
+        if (Input.GetKeyDown(KeyCode.R)||Input.GetButtonDown("Select")) {
             LoadLevel();
-=======
-        if (Input.GetKey(KeyCode.R) || Input.GetButton("Select")) {
->>>>>>> 735efc32d1b8288f18cd554020d0369cd40a4fc8
             player.ResetPlayer();
         }
     }
