@@ -17,6 +17,10 @@ public class PlayerScript : MonoBehaviour {
 		health -= i;
 	}
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 74fdf4fb19949a3a83c25b88c6287e6472c8c23b
     void toggleTrap()
     {
         canMove = !canMove;

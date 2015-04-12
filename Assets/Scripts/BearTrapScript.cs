@@ -52,5 +52,12 @@ public class BearTrapScript : MonoBehaviour {
             timer = 5.0f;
             isEnabled = true;
         }
+<<<<<<< HEAD
+=======
+		if (col.gameObject.tag == "Player") {
+		}
+            //player.toggleTrap();
+
+>>>>>>> 74fdf4fb19949a3a83c25b88c6287e6472c8c23b
     }
 }

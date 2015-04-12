@@ -23,7 +23,7 @@ public class LevelLoader : MonoBehaviour {
 
     private void LoadLevel() {
         
-        Texture2D tex = (Texture2D)Resources.Load("levels/level1");
+        Texture2D tex = (Texture2D)Resources.Load("levels/level2");
         Color32[] colors = tex.GetPixels32();
 
         Dictionary<Color32, int> table = new Dictionary<Color32, int>();
@@ -81,6 +81,10 @@ public class LevelLoader : MonoBehaviour {
                     go.AddComponent<Rigidbody2D>().isKinematic = true;
                     go.AddComponent<SpikeScript>();
                     break;
+			case 3: 
+					sr.sprite = ground;
+					go.name = "ground";
+					break;
                 default:
                     break;
             }
@@ -99,6 +103,10 @@ public class LevelLoader : MonoBehaviour {
 	void Update () {
         if (Input.GetKey(KeyCode.R)) {
             player.transform.position = playerStart;
+<<<<<<< HEAD
+=======
+            //PlayerScript.health = 1;
+>>>>>>> 74fdf4fb19949a3a83c25b88c6287e6472c8c23b
             player.SetActive(true);
         }
 	}
