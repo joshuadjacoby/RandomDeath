@@ -4,13 +4,17 @@ using System;
 
 public class PlayerScript : MonoBehaviour
 {
-    public int health;
+    private int health;
     private Rigidbody r;
-    public bool canMove;
-    public bool slow;
-    public float slowTimer;
+    private bool canMove;
+    private bool slow;
+    private float slowTimer;
     public Vector3 start;
-    public float mouseSensitivity = 200f;
+    private float mouseSensitivity;
+    private bool canSprint;
+    private bool isSprinting;
+    private float sprintTimer;
+    private float sprintCooldown;
 
     // Use this for initialization
     void Start()
@@ -22,6 +26,11 @@ public class PlayerScript : MonoBehaviour
         slowTimer = 3.0f;
         start = transform.position;
         Cursor.lockState = CursorLockMode.Locked;
+        mouseSensitivity = 200f;
+        canSprint = true;
+        isSprinting = false;
+        sprintTimer = 2.0f;
+        sprintCooldown = 4.0f;
     }
 
     void ApplyDamage(int i)
@@ -29,10 +38,10 @@ public class PlayerScript : MonoBehaviour
         health -= i;
     }
 
-    void toggleTrap()
+    /*void toggleTrap()
     {
         canMove = !canMove;
-    }
+    }*/
 
     void toggleSlow()
     {
@@ -80,9 +89,29 @@ public class PlayerScript : MonoBehaviour
                 slow = false;
                 slowTimer = 3.0f;
             }
-            if (Input.GetKey(KeyCode.LeftShift) || Input.GetButton("Left Analog"))
+            if (canSprint && Input.GetKey(KeyCode.LeftShift) || Input.GetButton("Left Analog"))
+            {
+                isSprinting = true;
+            }
+            else if (!canSprint)
+            {
+                sprintCooldown -= Time.deltaTime;
+            }
+            if (isSprinting)
             {
                 speed *= 2f;
+                sprintTimer -= Time.deltaTime;
+            }
+            if (sprintTimer <= 0)
+            {
+                isSprinting = false;
+                sprintTimer = 2.0f;
+                canSprint = false;
+            }
+            if (sprintCooldown <= 0)
+            {
+                canSprint = true;
+                sprintCooldown = 4.0f;
             }
             float x = Input.GetAxis("Horizontal");
             float y = Input.GetAxis("Vertical");

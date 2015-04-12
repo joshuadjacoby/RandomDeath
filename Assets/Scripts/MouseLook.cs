@@ -32,11 +32,12 @@ public class MouseLook : MonoBehaviour {
 	
 	void Update ()
 	{
+        
 		if (axes == RotationAxes.MouseXAndY)
 		{
 			float rotationX = transform.localEulerAngles.y + Input.GetAxis("Mouse X") * sensitivityX;
-			
-			rotationY += Input.GetAxis("Mouse Y") * sensitivityY;
+
+            rotationY += (Input.GetAxis("Mouse Y") /*== 0 ? Input.GetAxis("Right Vertical") * 3.0f : Input.GetAxis("Mouse Y")*/) * sensitivityY;
 			rotationY = Mathf.Clamp (rotationY, minimumY, maximumY);
 			
 			transform.localEulerAngles = new Vector3(-rotationY, rotationX, 0);
@@ -47,7 +48,7 @@ public class MouseLook : MonoBehaviour {
 		}
 		else
 		{
-			rotationY += Input.GetAxis("Mouse Y") * sensitivityY;
+            rotationY += (Input.GetAxis("Mouse X") /*== 0 ? Input.GetAxis("Right Horizontal") * 3.0f : Input.GetAxis("Mouse X")*/) * sensitivityY;
 			rotationY = Mathf.Clamp (rotationY, minimumY, maximumY);
 			
 			transform.localEulerAngles = new Vector3(-rotationY, transform.localEulerAngles.y, 0);
