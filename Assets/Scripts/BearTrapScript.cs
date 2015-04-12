@@ -17,44 +17,35 @@ public class BearTrapScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (timerOn && timer > 0)
+        /*if (timerOn && timer > 0)
         {
             timer -= Time.deltaTime;
         }
         if (timer <= 0)
         {
             isEnabled = false;
-        }
+        }*/
     }
 
-    void OnTriggerStay(Collider col)
+    void OnTriggerEnter(Collider col)
     {
-        if (col.gameObject.tag == "Player" && isEnabled)
+        if (col.gameObject.tag == "Player" /*&& isEnabled*/)
         {
-            col.gameObject.BroadcastMessage("toggleTrap");
-            col.gameObject.transform.position = Vector3.MoveTowards(col.gameObject.transform.position, transform.position, 1);
-            timerOn = true;
-            if (Input.GetKey("space") || Input.GetButtonDown("Fire1") || Input.GetButtonUp("Fire1"))
-            {
-                timer -= 0.05f;
-            }
-        }
-        else
-        {
-            col.gameObject.BroadcastMessage("toggleTrap");
+            col.gameObject.BroadcastMessage("toggleSlow");
+            //col.gameObject.transform.position = Vector3.MoveTowards(col.gameObject.transform.position, transform.position, 1);
+            //timerOn = true;
         }
     }
 
-    void OnTriggerExit(Collider col)
+/*    void OnTriggerExit(Collider col)
     {
 
         if (col.gameObject.tag == "Player")
         {
-			col.gameObject.BroadcastMessage("toggleTrap");
             col.gameObject.BroadcastMessage("toggleSlow");
             timerOn = false;
             isEnabled = true;
 			timer = 5.0f;
         }
-    }
+    }*/
 }
