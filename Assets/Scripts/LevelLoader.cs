@@ -48,13 +48,8 @@ public class LevelLoader : MonoBehaviour {
     }
 
     private void LoadLevel() {
-<<<<<<< HEAD
 
         Texture2D tex = (Texture2D)Resources.Load("levels/level1");
-=======
-        
-        Texture2D tex = (Texture2D)Resources.Load("levels/level2");
->>>>>>> 380917bc0edfc8a396ed5ef3c9499b2fb69e9ce0
         Color32[] colors = tex.GetPixels32();
 
         Dictionary<Color32, int> table = new Dictionary<Color32, int>();
@@ -178,46 +173,6 @@ public class LevelLoader : MonoBehaviour {
 
                 }
 
-<<<<<<< HEAD
-=======
-        GameObject tilesGameObject = new GameObject("tiles");
-        
-        for (int i = 0; i < tiles.Length; i++) {
-            GameObject go = new GameObject();
-
-            go.transform.parent = tilesGameObject.transform;
-            
-            SpriteRenderer sr = go.AddComponent<SpriteRenderer>();
-
-
-            go.transform.position = new Vector2((i % width) * tileSize, (i / width) * tileSize);
-            switch (tiles[i]) {
-                case 0:
-                    sr.sprite = ground;
-                    go.name = "ground";
-                    break;
-                case 1:
-                    sr.sprite = wall;
-                    go.name = "wall";
-                    go.AddComponent<BoxCollider2D>();
-                    go.AddComponent<Rigidbody2D>().isKinematic = true;
-                    break;
-                case 2:
-                    sr.sprite = spikes;
-                    go.name = "spikes";
-                    BoxCollider2D bc2 = go.AddComponent<BoxCollider2D>();
-                    bc2.isTrigger = true;
-                    bc2.size = bc2.size * .5f;
-                    go.AddComponent<Rigidbody2D>().isKinematic = true;
-                    go.AddComponent<SpikeScript>();
-                    break;
-			case 3: 
-					sr.sprite = ground;
-					go.name = "ground";
-					break;
-                default:
-                    break;
->>>>>>> 380917bc0edfc8a396ed5ef3c9499b2fb69e9ce0
             }
         }
 
@@ -243,7 +198,7 @@ public class LevelLoader : MonoBehaviour {
             index = 0;  // set it as ground
 
         }
-        
+
         Rect r = rects[index];
 
         uvs.Add(new Vector2(r.xMin, r.yMax));
@@ -278,16 +233,7 @@ public class LevelLoader : MonoBehaviour {
     // Update is called once per frame
     void Update() {
         if (Input.GetKey(KeyCode.R)) {
-<<<<<<< HEAD
             player.ResetPlayer();
-=======
-            player.transform.position = playerStart;
-<<<<<<< HEAD
-=======
-            //PlayerScript.health = 1;
->>>>>>> 74fdf4fb19949a3a83c25b88c6287e6472c8c23b
-            player.SetActive(true);
->>>>>>> 380917bc0edfc8a396ed5ef3c9499b2fb69e9ce0
         }
     }
 
