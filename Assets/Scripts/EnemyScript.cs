@@ -80,6 +80,8 @@ public class EnemyScript : MonoBehaviour {
 					break;
 				default:
 					break;
+
+					startingPlace = transform.position;
 				}
 				
 			} else if (wandering) {

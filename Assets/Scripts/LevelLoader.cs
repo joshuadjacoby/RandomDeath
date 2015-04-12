@@ -57,14 +57,16 @@ public class LevelLoader : MonoBehaviour {
         spikes = Resources.Load("prefabs/spikes");
         bearTrap = Resources.Load("prefabs/bear trap");
         
-        LoadLevel();
+		string l = "Levels/level1"; 
+
+        LoadLevel(l);
 
 
     }
 
-    private void LoadLevel() {
+    public void LoadLevel(string level) {
 
-        Texture2D tex = (Texture2D)Resources.Load("levels/level1");
+		Texture2D tex = (Texture2D)Resources.Load(level);
         Color32[] colors = tex.GetPixels32();
 
         Dictionary<Color32, int> table = new Dictionary<Color32, int>();

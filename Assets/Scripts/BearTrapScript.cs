@@ -50,10 +50,11 @@ public class BearTrapScript : MonoBehaviour
 
         if (col.gameObject.tag == "Player")
         {
+			col.gameObject.BroadcastMessage("toggleTrap");
             col.gameObject.BroadcastMessage("toggleSlow");
             timerOn = false;
-            timer = 5.0f;
             isEnabled = true;
+			timer = 5.0f;
         }
     }
 }

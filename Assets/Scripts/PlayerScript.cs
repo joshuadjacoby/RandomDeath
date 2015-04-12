@@ -74,7 +74,7 @@ public class PlayerScript : MonoBehaviour
             {
                 speed *= .3f;
                 slowTimer -= Time.deltaTime;
-                Debug.Log(slowTimer);
+                //Debug.Log(slowTimer);
             }
             else if (slow && slowTimer <= 0)
             {
