@@ -14,11 +14,11 @@ public class TrapdoorScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-		if (inTrap == true) {
+		/*if (inTrap == true) {
 
 			transform.position += new Vector3(0,0,0);
 
-		}
+		}*/
     }
 
     void OnTriggerEnter(Collider col)

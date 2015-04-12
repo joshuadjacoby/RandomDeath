@@ -51,6 +51,11 @@ public class PlayerScript : MonoBehaviour
         slow = !slow;
     }
 
+	void toggleTrap()
+	{
+		canMove = !canMove;
+	}
+
     public void ResetPlayer()
     {
         health = 1;
