@@ -21,12 +21,19 @@ public class PlayerScript : MonoBehaviour {
     private LevelLoader level;
     private float restartTimer = 0f;
     private DisplayButton dp;
+	public GameObject deathScreen;
+	static public Renderer deathRenderer;
+
 
     private Texture2D sprintBar;
     private GUIStyle style;
 
     // Use this for initialization
     void Start() {
+
+		deathRenderer = deathScreen.GetComponent<Renderer>();
+		deathRenderer.enabled = false;
+
         health = 1;
         r = GetComponent<Rigidbody>();
         canMove = true;
@@ -166,7 +173,8 @@ public class PlayerScript : MonoBehaviour {
             style.normal.textColor = Color.red;
             style.fontStyle = FontStyle.Bold;
             style.alignment = TextAnchor.MiddleCenter;
-            GUI.Label(new Rect(0, 0, Screen.width, Screen.height), "YOU DIED");
+            //GUI.Label(new Rect(0, 0, Screen.width, Screen.height), "YOU DIED");
+			deathRenderer.enabled = true;
         }
     }
 

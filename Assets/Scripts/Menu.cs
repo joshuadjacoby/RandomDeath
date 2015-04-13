@@ -4,7 +4,7 @@ using System.Collections;
 public class Menu : MonoBehaviour {
 
 	void Update() {
-		if (Input.GetKeyDown(KeyCode.Return) || Input.GetButtonDown ("Fire3")) {
+		if (Input.GetKeyDown(KeyCode.Return) || Input.GetButtonDown ("Fire3") || Input.GetMouseButtonDown(0)) {
 
 			Application.LoadLevel("Main");
 		}

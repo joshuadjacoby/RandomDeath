@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class LevelLoader : MonoBehaviour {
 
-    private int currentLevel = 21;
+    private int currentLevel = 0;
     public int[,] tiles;
     private int numberOfLevels;
 
@@ -46,6 +46,8 @@ public class LevelLoader : MonoBehaviour {
 
     // Use this for initialization
     void Start() {
+
+
         // load all levels
         player = GameObject.Find("Player").GetComponent<PlayerScript>();
 
@@ -76,6 +78,7 @@ public class LevelLoader : MonoBehaviour {
 
     public void LoadLevel() {
 
+		PlayerScript.deathRenderer.enabled = false;
         showText = true;
         showTextTimer = 3f;
 
