@@ -95,9 +95,9 @@ public class SpikeScript : MonoBehaviour {
         mesh = transform.Find("Mesh");
         mesh.GetComponent<MeshFilter>().mesh = m;
 
-        localBottom = new Vector3(mesh.localPosition.x, -1.2f, mesh.localPosition.z);
+        localBottom = new Vector3(mesh.localPosition.x, -1.3f, mesh.localPosition.z);
         localLowerPoke = new Vector3(mesh.localPosition.x, -1.05f, mesh.localPosition.z);
-        localFullPoke = new Vector3(mesh.localPosition.x, -.5f, mesh.localPosition.z);
+        localFullPoke = new Vector3(mesh.localPosition.x, -.55f, mesh.localPosition.z);
 
     }
 
