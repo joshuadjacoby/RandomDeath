@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class LevelLoader : MonoBehaviour {
 
-    private int currentLevel = 9000;
+    private int currentLevel = 0;
     public int[,] tiles;
     private int numberOfLevels;
 
@@ -59,7 +59,7 @@ public class LevelLoader : MonoBehaviour {
         bearTrap = Resources.Load("prefabs/bear trap");
         exit = Resources.Load("prefabs/exit");
         zombie = Resources.Load("prefabs/zombie");
-
+		lockedDoor = Resources.Load ("prefabs/LockedDoor");
         LoadLevel();
 
 
@@ -200,8 +200,10 @@ public class LevelLoader : MonoBehaviour {
                         break;
 
                     case LOCKED_DOOR:
-
-                        break;
+						go = (GameObject)Instantiate(lockedDoor, new Vector3(x + .5f, .5f, y + .5f), Quaternion.identity);
+						go.name = "Locked Door";
+						go.transform.parent = things.transform;
+					    break;
 
                     case SPAWN_ENEMY:
                         go = (GameObject)Instantiate(zombie, new Vector3(x + .5f, 0, y + .5f), Quaternion.identity);
