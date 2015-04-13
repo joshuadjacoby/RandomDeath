@@ -21,6 +21,7 @@ public class PlayerScript : MonoBehaviour
     private Transform cameraTransform;
     private LevelLoader level;
     private float restartTimer = 0f;
+    private DisplayButton dp;
 
     // Use this for initialization
     void Start()
@@ -41,6 +42,7 @@ public class PlayerScript : MonoBehaviour
         sprintCooldown = 5.0f;
         cameraTransform = transform.Find("MainCamera").transform;
         level = GameObject.Find("Level").GetComponent<LevelLoader>();
+        dp = GetComponent<DisplayButton>();
     }
 
     void ApplyDamage(int i)
@@ -60,6 +62,7 @@ public class PlayerScript : MonoBehaviour
 
     public void ResetPlayer()
     {
+        dp.Reset();
         health = 1;
         canMove = true;
         transform.position = start;
@@ -112,7 +115,6 @@ public class PlayerScript : MonoBehaviour
             {
                 speed *= .5f;
                 slowTimer -= Time.deltaTime;
-                //Debug.Log(slowTimer);
             }
             else if (slow && slowTimer <= 0)
             {
@@ -122,9 +124,8 @@ public class PlayerScript : MonoBehaviour
             if (canSprint && (Input.GetKey(KeyCode.LeftShift) || Input.GetButton("Left Analog")))
             {
                 speed *= 2f;
-                //sprintTimer -= Time.deltaTime;
+                sprintTimer -= Time.deltaTime;
                 isSprinting = true;
-                Debug.Log(sprintTimer);
             }
             else
             {
