@@ -39,7 +39,10 @@ public class EnemyScript : MonoBehaviour {
 		direction = Random.Range (-2, 4);
 		distance = Random.Range (0.5f, 3.0f);
 		wandering = false;
-		speed = 0.90f;
+        if (Random.Range(1, 100) == 100)
+            speed = 1.5f;
+        else
+		    speed = Random.Range (0.6f, 0.95f);
 	}
 
 	bool checkForPlayer () {
