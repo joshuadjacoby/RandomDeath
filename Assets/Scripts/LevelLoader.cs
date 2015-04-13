@@ -4,7 +4,11 @@ using System.Collections.Generic;
 
 public class LevelLoader : MonoBehaviour {
 
+<<<<<<< HEAD
     private int currentLevel = 7;
+=======
+    private int currentLevel = 0;
+>>>>>>> f3b41355ebc46ac6f705d6e8003d359f0da59ade
     public int[,] tiles;
     private int numberOfLevels;
 
@@ -306,6 +310,8 @@ public class LevelLoader : MonoBehaviour {
         if (showText) {
             GUI.skin.label.fontSize = 50;
             GUIStyle style = GUI.skin.GetStyle("Label");
+            style.normal.textColor = Color.white;
+            style.fontStyle = FontStyle.Normal;
             style.alignment = TextAnchor.MiddleCenter;
             GUI.Label(new Rect(0, 0, Screen.width, Screen.height),  levelNames[currentLevel]);
             //"Level\n" +
