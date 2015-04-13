@@ -5,7 +5,7 @@ public class TrapdoorScript : MonoBehaviour {
     public static bool inTrap = false;
     public static bool doorUnlocked = false;
     private Transform mesh;
-    private bool lowering = false;
+    public bool lowering = false;
 
     // Use this for initialization
     void Start() {

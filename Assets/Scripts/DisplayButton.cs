@@ -116,7 +116,10 @@ public class DisplayButton : MonoBehaviour {
 		if (col.gameObject.tag == "TrapDoor") 
 		{
 			currentDoor = col.gameObject.GetComponent<TrapdoorScript>();
-			touchingDoor = true;
+            if (!currentDoor.lowering) {
+
+                touchingDoor = true;
+            }
 			
 		}
 
