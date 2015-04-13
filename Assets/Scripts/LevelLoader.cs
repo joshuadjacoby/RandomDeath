@@ -20,6 +20,10 @@ public class LevelLoader : MonoBehaviour {
     private List<Vector3> verts = new List<Vector3>();
     private List<Vector2> uvs = new List<Vector2>();
     private int triNum = 0;
+    public string[] levelNames;
+
+    private bool showText = false;
+    private float showTextTimer = 0f;
 
     // ids that correspond to the .png level reader
     private const int GROUND = 0;
@@ -71,6 +75,10 @@ public class LevelLoader : MonoBehaviour {
     }
 
     public void LoadLevel() {
+
+        showText = true;
+        showTextTimer = 2f;
+
         if (mesh != null) {
             Destroy(mesh);
         }
@@ -122,7 +130,6 @@ public class LevelLoader : MonoBehaviour {
                 int h = getHeight(x, y); //gets the height of this tile
 
                 // add 2 triangles for this tile
-                if (h == 0) {
                     verts.Add(new Vector3(x, h, y));
                     verts.Add(new Vector3(x, h, y + 1));
                     verts.Add(new Vector3(x + 1, h, y + 1));
@@ -131,7 +138,7 @@ public class LevelLoader : MonoBehaviour {
                     verts.Add(new Vector3(x, h, y));
 
                     addUvsTris(tiles[x, y]);
-                }
+                
 
                 // if this tile is high and neighbors are low then add walls down your sides
                 if (h == 1) {
@@ -258,13 +265,6 @@ public class LevelLoader : MonoBehaviour {
 
         Rect r = rects[index];
 
-        //uvs.Add(new Vector2(r.xMin , r.yMax ));
-        //uvs.Add(new Vector2(r.xMin , r.yMin ));
-        //uvs.Add(new Vector2(r.xMax , r.yMin ));
-        //uvs.Add(new Vector2(r.xMax , r.yMin ));
-        //uvs.Add(new Vector2(r.xMax , r.yMax ));
-        //uvs.Add(new Vector2(r.xMin , r.yMax ));
-
         uvs.Add(new Vector2(r.xMin, r.yMin));
         uvs.Add(new Vector2(r.xMin, r.yMax));
         uvs.Add(new Vector2(r.xMax, r.yMax));
@@ -292,6 +292,23 @@ public class LevelLoader : MonoBehaviour {
                 return 1;
             default:
                 return 0;
+        }
+    }
+
+    void Update() {
+        showTextTimer -= Time.deltaTime;
+        if (showTextTimer < 0) {
+            showText = false;
+        }
+    }
+
+    void OnGUI() {
+        if (showText) {
+            GUI.skin.label.fontSize = 50;
+            GUIStyle style = GUI.skin.GetStyle("Label");
+            style.alignment = TextAnchor.MiddleCenter;
+            GUI.Label(new Rect(0, 0, Screen.width, Screen.height),  levelNames[currentLevel]);
+            //"Level\n" +
         }
     }
 
