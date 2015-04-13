@@ -65,7 +65,7 @@ public class LevelLoader : MonoBehaviour {
         bearTrap = Resources.Load("prefabs/bear trap");
         exit = Resources.Load("prefabs/exit");
         zombie = Resources.Load("prefabs/zombie");
-		lockedDoor = Resources.Load ("prefabs/LockedDoor");
+        lockedDoor = Resources.Load("prefabs/LockedDoor");
         LoadLevel();
 
 
@@ -74,13 +74,13 @@ public class LevelLoader : MonoBehaviour {
     public void LoadNextLevel() {
         //++currentLevel;
         currentLevel = Random.Range(1, 24);
-        
+
         LoadLevel();
     }
 
     public void LoadLevel() {
 
-		PlayerScript.deathRenderer.enabled = false;
+        PlayerScript.deathRenderer.enabled = false;
         showText = true;
         showTextTimer = 3f;
 
@@ -94,7 +94,7 @@ public class LevelLoader : MonoBehaviour {
         }
 
 
-		Texture2D tex = (Texture2D)Resources.Load("Levels/level" + currentLevel);
+        Texture2D tex = (Texture2D)Resources.Load("Levels/level" + currentLevel);
         Color32[] colors = tex.GetPixels32();
 
         Dictionary<Color32, int> table = new Dictionary<Color32, int>();
@@ -135,15 +135,15 @@ public class LevelLoader : MonoBehaviour {
                 int h = getHeight(x, y); //gets the height of this tile
 
                 // add 2 triangles for this tile
-                    verts.Add(new Vector3(x, h, y));
-                    verts.Add(new Vector3(x, h, y + 1));
-                    verts.Add(new Vector3(x + 1, h, y + 1));
-                    verts.Add(new Vector3(x + 1, h, y + 1));
-                    verts.Add(new Vector3(x + 1, h, y));
-                    verts.Add(new Vector3(x, h, y));
+                verts.Add(new Vector3(x, h, y));
+                verts.Add(new Vector3(x, h, y + 1));
+                verts.Add(new Vector3(x + 1, h, y + 1));
+                verts.Add(new Vector3(x + 1, h, y + 1));
+                verts.Add(new Vector3(x + 1, h, y));
+                verts.Add(new Vector3(x, h, y));
 
-                    addUvsTris(tiles[x, y]);
-                
+                addUvsTris(tiles[x, y]);
+
 
                 // if this tile is high and neighbors are low then add walls down your sides
                 if (h == 1) {
@@ -214,10 +214,10 @@ public class LevelLoader : MonoBehaviour {
                         break;
 
                     case LOCKED_DOOR:
-						go = (GameObject)Instantiate(lockedDoor, new Vector3(x + .5f, .5f, y + .5f), Quaternion.identity);
-						go.name = "Locked Door";
-						go.transform.parent = things.transform;
-					    break;
+                        go = (GameObject)Instantiate(lockedDoor, new Vector3(x + .5f, .5f, y + .5f), Quaternion.identity);
+                        go.name = "Locked Door";
+                        go.transform.parent = things.transform;
+                        break;
 
                     case SPAWN_ENEMY:
                         go = (GameObject)Instantiate(zombie, new Vector3(x + .5f, 0, y + .5f), Quaternion.identity);
@@ -226,9 +226,9 @@ public class LevelLoader : MonoBehaviour {
                         break;
 
                     case ENTRANCE:
-                        player.start = new Vector3(x, 0, y);
+                        player.start = new Vector3(x + .5f, .5f, y + .5f);
                         player.ResetPlayer();
-                        
+
                         break;
 
                     case EXIT:
@@ -309,12 +309,12 @@ public class LevelLoader : MonoBehaviour {
 
     void OnGUI() {
         if (showText) {
-			GUI.skin.label.fontSize = 50;
+            GUI.skin.label.fontSize = 50;
             GUIStyle style = GUI.skin.GetStyle("Label");
             style.normal.textColor = Color.white;
             style.fontStyle = FontStyle.Normal;
             style.alignment = TextAnchor.MiddleCenter;
-            GUI.Label(new Rect(0, 0, Screen.width, Screen.height),  levelNames[currentLevel]);
+            GUI.Label(new Rect(0, 0, Screen.width, Screen.height), levelNames[currentLevel]);
             //"Level\n" +
         }
     }
