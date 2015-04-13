@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class LevelLoader : MonoBehaviour {
 
-    private int currentLevel = 0;
+    private int currentLevel = 3;
     public int[,] tiles;
     private int numberOfLevels;
 
@@ -252,7 +252,7 @@ public class LevelLoader : MonoBehaviour {
             index = Random.value < .2 ? 9 : WALL;
         }
 
-        if (index == SPIKES) {
+        if (index == SPIKES || index == LOCKED_DOOR) {
             index = GROUND;
         }
 
