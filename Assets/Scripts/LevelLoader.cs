@@ -46,6 +46,8 @@ public class LevelLoader : MonoBehaviour {
 
     // Use this for initialization
     void Start() {
+
+
         // load all levels
         player = GameObject.Find("Player").GetComponent<PlayerScript>();
 
@@ -76,6 +78,7 @@ public class LevelLoader : MonoBehaviour {
 
     public void LoadLevel() {
 
+		PlayerScript.deathRenderer.enabled = false;
         showText = true;
         showTextTimer = 3f;
 
@@ -304,10 +307,8 @@ public class LevelLoader : MonoBehaviour {
 
     void OnGUI() {
         if (showText) {
-            GUI.skin.label.fontSize = 50;
+			GUI.skin.label.fontSize = 50;
             GUIStyle style = GUI.skin.GetStyle("Label");
-            style.normal.textColor = Color.white;
-            style.fontStyle = FontStyle.Normal;
             style.alignment = TextAnchor.MiddleCenter;
             GUI.Label(new Rect(0, 0, Screen.width, Screen.height),  levelNames[currentLevel]);
             //"Level\n" +
