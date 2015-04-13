@@ -10,11 +10,6 @@ public class EnemyScript : MonoBehaviour {
 	private int damage;
     private int health;
 
-	/*
-	private float lastWalk; // RS: last time zombie finished walking
-	private float walkTime;
-	private float walkCD;
-	*/
 	private int direction;
 	private float distance;
 	private Vector3 lastSeen;
