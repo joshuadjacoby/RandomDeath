@@ -7,6 +7,7 @@ public class PlayerScript : MonoBehaviour
     private int health;
     private Rigidbody r;
     private bool canMove;
+	private bool lockDoor;
     private bool slow;
     private float slowTimer;
     public Vector3 start;
@@ -27,6 +28,7 @@ public class PlayerScript : MonoBehaviour
         health = 1;
         r = GetComponent<Rigidbody>();
         canMove = true;
+		lockDoor = true;
         slow = false;
         slowTimer = 5.0f;
         start = transform.position;
@@ -120,7 +122,7 @@ public class PlayerScript : MonoBehaviour
             if (canSprint && (Input.GetKey(KeyCode.LeftShift) || Input.GetButton("Left Analog")))
             {
                 speed *= 2f;
-                sprintTimer -= Time.deltaTime;
+                //sprintTimer -= Time.deltaTime;
                 isSprinting = true;
                 Debug.Log(sprintTimer);
             }
