@@ -2,12 +2,11 @@
 using System.Collections;
 using System;
 
-public class PlayerScript : MonoBehaviour
-{
+public class PlayerScript : MonoBehaviour {
     private int health;
     private Rigidbody r;
     private bool canMove;
-	private bool lockDoor;
+    private bool lockDoor;
     private bool slow;
     private float slowTimer;
     public Vector3 start;
@@ -23,13 +22,15 @@ public class PlayerScript : MonoBehaviour
     private float restartTimer = 0f;
     private DisplayButton dp;
 
+    private Texture2D sprintBar;
+    private GUIStyle style;
+
     // Use this for initialization
-    void Start()
-    {
+    void Start() {
         health = 1;
         r = GetComponent<Rigidbody>();
         canMove = true;
-		lockDoor = true;
+        lockDoor = true;
         slow = false;
         slowTimer = 5.0f;
         start = transform.position;
@@ -39,29 +40,27 @@ public class PlayerScript : MonoBehaviour
         canSprint = true;
         isSprinting = false;
         sprintTimer = 2.0f;
-        sprintCooldown = 5.0f;
+        sprintCooldown = 3.0f;
         cameraTransform = transform.Find("MainCamera").transform;
         level = GameObject.Find("Level").GetComponent<LevelLoader>();
         dp = GetComponent<DisplayButton>();
+        sprintBar = new Texture2D(1, 1);
+        style = new GUIStyle();
     }
 
-    void ApplyDamage(int i)
-    {
+    void ApplyDamage(int i) {
         health -= i;
     }
 
-    void toggleSlow()
-    {
+    void toggleSlow() {
         slow = !slow;
     }
 
-	void toggleTrap()
-	{
-		canMove = !canMove;
-	}
+    void toggleTrap() {
+        canMove = !canMove;
+    }
 
-    public void ResetPlayer()
-    {
+    public void ResetPlayer() {
         dp.Reset();
         health = 1;
         canMove = true;
@@ -70,8 +69,7 @@ public class PlayerScript : MonoBehaviour
     }
 
 
-    void Update()
-    {
+    void Update() {
 
         if (Input.GetKeyDown(KeyCode.R) || Input.GetButtonDown("Select")) {
             level.LoadLevel();
@@ -89,7 +87,7 @@ public class PlayerScript : MonoBehaviour
             level.LoadLevel();
             ResetPlayer();
         }
-            
+
 
         float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
         float controllerX = Input.GetAxis("Right Horizontal") * controllerSensitivity * Time.deltaTime;
@@ -105,48 +103,36 @@ public class PlayerScript : MonoBehaviour
     }
 
     // Update is called once per frame
-    void FixedUpdate()
-    {
-        if (canMove)
-        {
+    void FixedUpdate() {
+        if (canMove) {
             float speed = 1.2f;
 
-            if (slow && slowTimer > 0)
-            {
+            if (slow && slowTimer > 0) {
                 speed *= .5f;
                 slowTimer -= Time.deltaTime;
-            }
-            else if (slow && slowTimer <= 0)
-            {
+            } else if (slow && slowTimer <= 0) {
                 slow = false;
                 slowTimer = 5.0f;
             }
-            if (canSprint && (Input.GetKey(KeyCode.LeftShift) || Input.GetButton("Left Analog")))
-            {
+            if (canSprint && (Input.GetKey(KeyCode.LeftShift) || Input.GetButton("Left Analog"))) {
                 speed *= 2f;
                 sprintTimer -= Time.deltaTime;
                 isSprinting = true;
-            }
-            else
-            {
+            } else {
                 isSprinting = false;
             }
-            if (sprintTimer <= 0)
-            {
+            if (sprintTimer <= 0) {
                 canSprint = false;
             }
-            if (canSprint && sprintTimer < 2f && !isSprinting)
-            {
+            if (canSprint && sprintTimer < 2f && !isSprinting) {
                 sprintTimer += Time.deltaTime / 2;
             }
-            if (sprintCooldown <= 0)
-            {
+            if (sprintCooldown <= 0) {
                 canSprint = true;
-                sprintCooldown = 5f;
-                sprintTimer = 2f;   
+                sprintCooldown = 3f;
+                sprintTimer = 2f;
             }
-            if (!canSprint)
-            {
+            if (!canSprint) {
                 sprintCooldown -= Time.deltaTime;
             }
             float x = Input.GetAxis("Horizontal");
@@ -154,10 +140,25 @@ public class PlayerScript : MonoBehaviour
 
             r.velocity = transform.TransformDirection(new Vector3(x * speed, 0, y * speed));
 
-        }
-        else
-        {
+        } else {
             r.velocity = Vector3.zero;
         }
     }
+
+    void OnGUI() {
+
+        if (canSprint) {
+            sprintBar.SetPixel(0, 0, Color.yellow);
+            sprintBar.Apply();
+            style.normal.background = sprintBar;
+            GUI.Box(new Rect(0, Screen.height - 25, Screen.width * sprintTimer / 2, 25), GUIContent.none, style);
+        } else {
+            sprintBar.SetPixel(0, 0, Color.red);
+            sprintBar.Apply();
+            style.normal.background = sprintBar;
+            GUI.Box(new Rect(0, Screen.height - 25, Screen.width * (1 - sprintCooldown / 3), 25), GUIContent.none, style);
+        }
+
+    }
+
 }

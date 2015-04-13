@@ -43,6 +43,7 @@ public class LevelLoader : MonoBehaviour {
     private Object zombie;
 
 
+
     // Use this for initialization
     void Start() {
         // load all levels
@@ -57,7 +58,6 @@ public class LevelLoader : MonoBehaviour {
         mat.SetTexture(0, atlas);
 
         GetComponent<MeshRenderer>().material = mat;
-
 
         spikes = Resources.Load("prefabs/spikes");
         bearTrap = Resources.Load("prefabs/bear trap");
@@ -77,7 +77,7 @@ public class LevelLoader : MonoBehaviour {
     public void LoadLevel() {
 
         showText = true;
-        showTextTimer = 2f;
+        showTextTimer = 3f;
 
         if (mesh != null) {
             Destroy(mesh);
