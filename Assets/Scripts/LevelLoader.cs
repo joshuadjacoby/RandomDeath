@@ -4,11 +4,7 @@ using System.Collections.Generic;
 
 public class LevelLoader : MonoBehaviour {
 
-<<<<<<< HEAD
     private int currentLevel = 7;
-=======
-    private int currentLevel = 0;
->>>>>>> f3b41355ebc46ac6f705d6e8003d359f0da59ade
     public int[,] tiles;
     private int numberOfLevels;
 
