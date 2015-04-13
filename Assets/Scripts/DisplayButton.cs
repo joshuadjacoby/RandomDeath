@@ -59,8 +59,11 @@ public class DisplayButton : MonoBehaviour {
 				if (Input.GetKeyDown (KeyCode.A) || Input.GetButtonDown("Fire1")) {
 					j++;
 					Ar.enabled = false;
-			
-				}
+
+                } else if (Input.anyKeyDown) {
+                    Reset();
+                    touchingDoor = true;
+                }
 
 			} else if (key [j] == 'B') {
 
@@ -68,7 +71,10 @@ public class DisplayButton : MonoBehaviour {
 				if (Input.GetKeyDown (KeyCode.B) || Input.GetButtonDown("Fire2")) {
 					j++;
 					Br.enabled = false;
-				}
+				}else if (Input.anyKeyDown) {
+                    Reset();
+                    touchingDoor = true;
+                }
 
 			} else if (key [j] == 'X') {
 
@@ -76,7 +82,10 @@ public class DisplayButton : MonoBehaviour {
 				if (Input.GetKeyDown (KeyCode.X) || Input.GetButtonDown("Fire3")) {
 					j++;
 					Xr.enabled = false;
-				}
+                } else if (Input.anyKeyDown) {
+                    Reset();
+                    touchingDoor = true;
+                }
 			} else if (key [j] == 'Y') {
 
 				Yr.enabled = true;
@@ -84,7 +93,10 @@ public class DisplayButton : MonoBehaviour {
 					j++;
 				
 					Yr.enabled = false;
-				}
+                } else if (Input.anyKeyDown) {
+                    Reset();
+                    touchingDoor = true;
+                }
 			}	
 		}
 
