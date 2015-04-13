@@ -25,7 +25,7 @@ RenderSettings:
   m_AmbientGroundColor: {r: .0469999984, g: .0430000015, b: .0350000001, a: 1}
   m_AmbientIntensity: 1
   m_AmbientMode: 3
-  m_SkyboxMaterial: {fileID: 2100000, guid: b9be0c15efe8ad9489fdeead114d8ec5, type: 2}
+  m_SkyboxMaterial: {fileID: 0}
   m_HaloStrength: .5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -87,67 +87,6 @@ NavMeshSettings:
     cellSize: .166666672
     manualCellSize: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &33980927
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 33980928}
-  - 33: {fileID: 33980930}
-  - 23: {fileID: 33980929}
-  m_Layer: 0
-  m_Name: Moon
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &33980928
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 33980927}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 100, y: 200, z: -200}
-  m_LocalScale: {x: 50, y: 50, z: 50}
-  m_Children:
-  - {fileID: 372101630}
-  m_Father: {fileID: 0}
-  m_RootOrder: 2
---- !u!23 &33980929
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 33980927}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_Materials:
-  - {fileID: 2100000, guid: dd4331f73a52fc94b9ca9dc0a32fa5e7, type: 2}
-  m_SubsetIndices: 
-  m_StaticBatchRoot: {fileID: 0}
-  m_UseLightProbes: 1
-  m_ReflectionProbeUsage: 1
-  m_ProbeAnchor: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_PreserveUVs: 0
-  m_ImportantGI: 0
-  m_AutoUVMaxDistance: .5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingOrder: 0
---- !u!33 &33980930
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 33980927}
-  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &225507275
 GameObject:
   m_PrefabParentObject: {fileID: 123600, guid: df07bf7c2ab6848a783dc59f73645fd5, type: 2}
@@ -156,66 +95,6 @@ GameObject:
 Transform:
   m_PrefabParentObject: {fileID: 410994, guid: df07bf7c2ab6848a783dc59f73645fd5, type: 2}
   m_PrefabInternal: {fileID: 1799554362}
---- !u!1 &372101628
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 372101630}
-  - 108: {fileID: 372101629}
-  m_Layer: 0
-  m_Name: MoonLight
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!108 &372101629
-Light:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 372101628}
-  m_Enabled: 1
-  serializedVersion: 6
-  m_Type: 1
-  m_Color: {r: 0, g: .751724005, b: 1, a: 1}
-  m_Intensity: .400000006
-  m_Range: 10
-  m_SpotAngle: 30
-  m_CookieSize: 10
-  m_Shadows:
-    m_Type: 1
-    m_Resolution: 3
-    m_Strength: 1
-    m_Bias: .0500000007
-    m_NormalBias: .400000006
-  m_Cookie: {fileID: 0}
-  m_DrawHalo: 0
-  m_Flare: {fileID: 0}
-  m_RenderMode: 0
-  m_CullingMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_Lightmapping: 4
-  m_BounceIntensity: 1
-  m_ShadowRadius: 0
-  m_ShadowAngle: 0
-  m_AreaSize: {x: 1, y: 1}
---- !u!4 &372101630
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 372101628}
-  m_LocalRotation: {x: .408217937, y: -.234569728, z: .109381676, w: .875426054}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: .0199999996, y: .0199999996, z: .0200000014}
-  m_Children: []
-  m_Father: {fileID: 33980928}
-  m_RootOrder: 0
 --- !u!1001 &433677161
 Prefab:
   m_ObjectHideFlags: 0
@@ -262,10 +141,6 @@ Prefab:
     - target: {fileID: 431544, guid: 0b1e79f143d58419da00b372b8915739, type: 2}
       propertyPath: m_LocalScale.y
       value: .0299999993
-      objectReference: {fileID: 0}
-    - target: {fileID: 21201886, guid: 0b1e79f143d58419da00b372b8915739, type: 2}
-      propertyPath: m_Enabled
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0b1e79f143d58419da00b372b8915739, type: 2}
@@ -319,7 +194,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 21241750, guid: 4dcabf9024183471e85a9ba39e5050a4, type: 2}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4dcabf9024183471e85a9ba39e5050a4, type: 2}
@@ -738,10 +613,6 @@ Prefab:
       propertyPath: m_LocalScale.y
       value: .0299999993
       objectReference: {fileID: 0}
-    - target: {fileID: 21283424, guid: df07bf7c2ab6848a783dc59f73645fd5, type: 2}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: df07bf7c2ab6848a783dc59f73645fd5, type: 2}
   m_IsPrefabParent: 0
@@ -776,13 +647,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textures:
-  - {fileID: 2800000, guid: 74c8b3f2199580643abe97d88c5a07c3, type: 3}
+  - {fileID: 2800000, guid: beed566e3dccff548afa8beec4c32216, type: 3}
   - {fileID: 2800000, guid: 61d87de8af318a2429f5f30089f1b26c, type: 3}
   - {fileID: 0}
-  - {fileID: 2800000, guid: 72ec83dd0eb651f4cbdf2f7363f9fe1d, type: 3}
+  - {fileID: 2800000, guid: c8daafec743158743b547da7a3d4f2de, type: 3}
   - {fileID: 2800000, guid: 32e6b4dd8326a98408f60dbc4b5edd73, type: 3}
   - {fileID: 2800000, guid: f55a788a7af3a97408796a6cb3131dab, type: 3}
-  - {fileID: 2800000, guid: 74c8b3f2199580643abe97d88c5a07c3, type: 3}
+  - {fileID: 2800000, guid: beed566e3dccff548afa8beec4c32216, type: 3}
   - {fileID: 2800000, guid: 6b23a48f21e3d684cbabb2ee210a8857, type: 3}
   - {fileID: 2800000, guid: 38e6ed040f0feda419d1501a05a1100c, type: 3}
   - {fileID: 2800000, guid: d4f1a107d021310429c7bbd352ccd4ab, type: 3}
@@ -794,31 +665,36 @@ MonoBehaviour:
   atlas: {fileID: 0}
   rects: []
   levelNames:
-  - Welcome
-  - This is level 1
-  - Level 2
-  - Level 3
-  - Level 4
-  - Level 5
-  - Level 6
-  - Level 7
-  - Level 8
-  - Level 9
-  - Level 10
-  - Level 11
-  - Level 12
-  - Level 13
-  - Level 14
-  - Level 15
-  - Level 14
-  - Level 14
-  - Level 14
-  - Level 14
-  - Level 14
-  - Level 14
-  - Level 14
-  - Level 14
-  - Level 14
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - Run, Run!
+  - You think it is obvious?
+  - Level 20
+  - Level 20
+  - Level 20
+  - Level 20
+  - Level 20
+  - Level 20
+  - Level 20
+  - Level 20
 --- !u!4 &1881245576
 Transform:
   m_ObjectHideFlags: 0
