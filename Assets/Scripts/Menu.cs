@@ -11,9 +11,9 @@ public class Menu : MonoBehaviour {
 	}
 
     void OnMouseDown() {
-     if (this.name == "PlayBT")
-     {
+     //if (this.name == "PlayBT")
+     //{
    		Application.LoadLevel("Main");
-     }
+     //}
     }
 }
