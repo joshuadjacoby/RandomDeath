@@ -21,8 +21,10 @@ public class PlayerScript : MonoBehaviour {
     private LevelLoader level;
     private float restartTimer = 0f;
     private DisplayButton dp;
-	public GameObject deathScreen;
-	static public Renderer deathRenderer;
+    public GameObject deathScreen;
+    static public Renderer deathRenderer;
+    private int levelsWithoutDying = -1;
+    private int maxStreak = 0;
 
 
     private Texture2D sprintBar;
@@ -31,8 +33,8 @@ public class PlayerScript : MonoBehaviour {
     // Use this for initialization
     void Start() {
 
-		deathRenderer = deathScreen.GetComponent<Renderer>();
-		deathRenderer.enabled = false;
+        deathRenderer = deathScreen.GetComponent<Renderer>();
+        deathRenderer.enabled = false;
 
         health = 1;
         r = GetComponent<Rigidbody>();
@@ -68,6 +70,12 @@ public class PlayerScript : MonoBehaviour {
     }
 
     public void ResetPlayer() {
+        if (canMove) {
+            levelsWithoutDying++;
+            maxStreak = Mathf.Max(maxStreak, levelsWithoutDying);
+        } else {
+            levelsWithoutDying = 0;
+        }
         dp.Reset();
         health = 1;
         canMove = true;
@@ -80,9 +88,8 @@ public class PlayerScript : MonoBehaviour {
     void Update() {
 
         if (Input.GetKeyDown(KeyCode.R) || Input.GetButtonDown("Select")) {
+            levelsWithoutDying = -1;
             level.LoadNextLevel();
-            //level.LoadLevel();
-            ResetPlayer();
         }
 
         if (health <= 0 && canMove) {
@@ -94,7 +101,6 @@ public class PlayerScript : MonoBehaviour {
         restartTimer -= Time.deltaTime;
         if (restartTimer < 0f && !canMove) {
             level.LoadLevel();
-            ResetPlayer();
         }
 
 
@@ -157,7 +163,11 @@ public class PlayerScript : MonoBehaviour {
     void OnGUI() {
 
         if (canSprint) {
-            sprintBar.SetPixel(0, 0, Color.yellow);
+            if (slow) {
+                sprintBar.SetPixel(0, 0, new Color(.5f , 0f, 1f));
+            } else {
+                sprintBar.SetPixel(0, 0, Color.yellow);
+            }
             sprintBar.Apply();
             style.normal.background = sprintBar;
             GUI.Box(new Rect(0, Screen.height - 25, Screen.width * sprintTimer / 2, 25), GUIContent.none, style);
@@ -170,14 +180,17 @@ public class PlayerScript : MonoBehaviour {
 
         if (!canMove) {
             GUI.skin.label.fontSize = 100;
-            
-            //GUIStyle style = GUI.skin.GetStyle("Label");
-            //style.normal.textColor = Color.red;
-            //style.fontStyle = FontStyle.Bold;
-            //style.alignment = TextAnchor.MiddleCenter;
-            //GUI.Label(new Rect(0, 0, Screen.width, Screen.height), "YOU DIED");
-			deathRenderer.enabled = true;
+            deathRenderer.enabled = true;
         }
+
+        GUI.skin.label.fontSize = 30;
+        GUIStyle s = GUI.skin.GetStyle("Label");
+        s.normal.textColor = Color.white;
+        s.fontStyle = FontStyle.Bold;
+        s.alignment = TextAnchor.UpperLeft;
+        GUI.Label(new Rect(0, 0, 500, 100), "Current Streak: " + levelsWithoutDying + " Max: " + maxStreak);
+
+
     }
 
 }
