@@ -105,7 +105,6 @@ public class PlayerScript : MonoBehaviour
             {
                 speed *= .5f;
                 slowTimer -= Time.deltaTime;
-                //Debug.Log(slowTimer);
             }
             else if (slow && slowTimer <= 0)
             {
@@ -117,7 +116,6 @@ public class PlayerScript : MonoBehaviour
                 speed *= 2f;
                 sprintTimer -= Time.deltaTime;
                 isSprinting = true;
-                Debug.Log(sprintTimer);
             }
             else
             {
