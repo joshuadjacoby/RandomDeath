@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class LevelLoader : MonoBehaviour {
 
-    private int currentLevel = 0;
+    private int currentLevel = 3;
     public int[,] tiles;
     private int numberOfLevels;
 
@@ -106,7 +106,7 @@ public class LevelLoader : MonoBehaviour {
 
         // turn into 2D array
         for (int i = 0; i < tiles1D.Length; i++) {
-            tiles[i % width, i / height] = tiles1D[i];
+            tiles[i % width, i / width] = tiles1D[i];
         }
 
         tris.Clear();
@@ -122,14 +122,16 @@ public class LevelLoader : MonoBehaviour {
                 int h = getHeight(x, y); //gets the height of this tile
 
                 // add 2 triangles for this tile
-                verts.Add(new Vector3(x, h, y));
-                verts.Add(new Vector3(x, h, y + 1));
-                verts.Add(new Vector3(x + 1, h, y + 1));
-                verts.Add(new Vector3(x + 1, h, y + 1));
-                verts.Add(new Vector3(x + 1, h, y));
-                verts.Add(new Vector3(x, h, y));
+                if (h == 0) {
+                    verts.Add(new Vector3(x, h, y));
+                    verts.Add(new Vector3(x, h, y + 1));
+                    verts.Add(new Vector3(x + 1, h, y + 1));
+                    verts.Add(new Vector3(x + 1, h, y + 1));
+                    verts.Add(new Vector3(x + 1, h, y));
+                    verts.Add(new Vector3(x, h, y));
 
-                addUvsTris(tiles[x, y]);
+                    addUvsTris(tiles[x, y]);
+                }
 
                 // if this tile is high and neighbors are low then add walls down your sides
                 if (h == 1) {
@@ -247,21 +249,28 @@ public class LevelLoader : MonoBehaviour {
 
     public void addUvsTris(int index) {
         if (index == WALL) {
-            index = Random.value < .2 ? 9 : WALL;
+            index = Random.value < .75 ? Random.Range(9, 15) : WALL;
         }
 
-        if (index == SPIKES) {
+        if (index == SPIKES || index == LOCKED_DOOR) {
             index = GROUND;
         }
 
         Rect r = rects[index];
 
-        uvs.Add(new Vector2(r.xMin , r.yMax ));
-        uvs.Add(new Vector2(r.xMin , r.yMin ));
-        uvs.Add(new Vector2(r.xMax , r.yMin ));
-        uvs.Add(new Vector2(r.xMax , r.yMin ));
-        uvs.Add(new Vector2(r.xMax , r.yMax ));
-        uvs.Add(new Vector2(r.xMin , r.yMax ));
+        //uvs.Add(new Vector2(r.xMin , r.yMax ));
+        //uvs.Add(new Vector2(r.xMin , r.yMin ));
+        //uvs.Add(new Vector2(r.xMax , r.yMin ));
+        //uvs.Add(new Vector2(r.xMax , r.yMin ));
+        //uvs.Add(new Vector2(r.xMax , r.yMax ));
+        //uvs.Add(new Vector2(r.xMin , r.yMax ));
+
+        uvs.Add(new Vector2(r.xMin, r.yMin));
+        uvs.Add(new Vector2(r.xMin, r.yMax));
+        uvs.Add(new Vector2(r.xMax, r.yMax));
+        uvs.Add(new Vector2(r.xMax, r.yMax));
+        uvs.Add(new Vector2(r.xMax, r.yMin));
+        uvs.Add(new Vector2(r.xMin, r.yMin));
 
         tris.Add(triNum++);
         tris.Add(triNum++);
