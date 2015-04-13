@@ -124,7 +124,7 @@ public class PlayerScript : MonoBehaviour
             if (canSprint && (Input.GetKey(KeyCode.LeftShift) || Input.GetButton("Left Analog")))
             {
                 speed *= 2f;
-                //sprintTimer -= Time.deltaTime;
+                sprintTimer -= Time.deltaTime;
                 isSprinting = true;
             }
             else
