@@ -73,13 +73,15 @@ public class PlayerScript : MonoBehaviour {
         canMove = true;
         transform.position = start;
         r.isKinematic = false;
+
     }
 
 
     void Update() {
 
         if (Input.GetKeyDown(KeyCode.R) || Input.GetButtonDown("Select")) {
-            level.LoadLevel();
+            level.LoadNextLevel();
+            //level.LoadLevel();
             ResetPlayer();
         }
 
@@ -169,10 +171,10 @@ public class PlayerScript : MonoBehaviour {
         if (!canMove) {
             GUI.skin.label.fontSize = 100;
             
-            GUIStyle style = GUI.skin.GetStyle("Label");
-            style.normal.textColor = Color.red;
-            style.fontStyle = FontStyle.Bold;
-            style.alignment = TextAnchor.MiddleCenter;
+            //GUIStyle style = GUI.skin.GetStyle("Label");
+            //style.normal.textColor = Color.red;
+            //style.fontStyle = FontStyle.Bold;
+            //style.alignment = TextAnchor.MiddleCenter;
             //GUI.Label(new Rect(0, 0, Screen.width, Screen.height), "YOU DIED");
 			deathRenderer.enabled = true;
         }

@@ -72,7 +72,9 @@ public class LevelLoader : MonoBehaviour {
     }
 
     public void LoadNextLevel() {
-        ++currentLevel;
+        //++currentLevel;
+        currentLevel = Random.Range(1, 24);
+        
         LoadLevel();
     }
 
@@ -309,6 +311,8 @@ public class LevelLoader : MonoBehaviour {
         if (showText) {
 			GUI.skin.label.fontSize = 50;
             GUIStyle style = GUI.skin.GetStyle("Label");
+            style.normal.textColor = Color.white;
+            style.fontStyle = FontStyle.Normal;
             style.alignment = TextAnchor.MiddleCenter;
             GUI.Label(new Rect(0, 0, Screen.width, Screen.height),  levelNames[currentLevel]);
             //"Level\n" +

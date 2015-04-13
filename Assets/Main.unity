@@ -98,12 +98,12 @@ GameObject:
   - 33: {fileID: 178466855}
   - 23: {fileID: 178466854}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: Moon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!23 &178466854
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -114,7 +114,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 0}
+  - {fileID: 2100000, guid: dd4331f73a52fc94b9ca9dc0a32fa5e7, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -142,8 +142,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 178466853}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 350, y: 200, z: 100}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 200, y: 200, z: -300}
+  m_LocalScale: {x: 50, y: 50, z: 50}
   m_Children:
   - {fileID: 1456339438}
   m_Father: {fileID: 0}
@@ -309,7 +309,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   start: {x: 0, y: 0, z: 0}
-  deathScreen: {fileID: 0}
+  deathScreen: {fileID: 773367536}
 --- !u!54 &518990115
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -549,7 +549,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1456339437}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: .408217937, y: -.234569728, z: .109381676, w: .875426054}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -564,14 +564,14 @@ Light:
   m_Enabled: 1
   serializedVersion: 6
   m_Type: 1
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: .735294104, g: .934279859, b: 1, a: 1}
   m_Intensity: .300000012
   m_Range: 10
   m_SpotAngle: 30
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 0
-    m_Resolution: -1
+    m_Type: 1
+    m_Resolution: 3
     m_Strength: 1
     m_Bias: .0500000007
     m_NormalBias: .400000006
@@ -824,13 +824,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textures:
-  - {fileID: 2800000, guid: beed566e3dccff548afa8beec4c32216, type: 3}
+  - {fileID: 2800000, guid: 74c8b3f2199580643abe97d88c5a07c3, type: 3}
   - {fileID: 2800000, guid: 61d87de8af318a2429f5f30089f1b26c, type: 3}
   - {fileID: 0}
-  - {fileID: 2800000, guid: c8daafec743158743b547da7a3d4f2de, type: 3}
+  - {fileID: 2800000, guid: 72ec83dd0eb651f4cbdf2f7363f9fe1d, type: 3}
   - {fileID: 2800000, guid: 32c168de5c0d37542b7d49b9f82c351d, type: 3}
   - {fileID: 2800000, guid: f55a788a7af3a97408796a6cb3131dab, type: 3}
-  - {fileID: 2800000, guid: beed566e3dccff548afa8beec4c32216, type: 3}
+  - {fileID: 2800000, guid: 74c8b3f2199580643abe97d88c5a07c3, type: 3}
   - {fileID: 2800000, guid: 6b23a48f21e3d684cbabb2ee210a8857, type: 3}
   - {fileID: 2800000, guid: 38e6ed040f0feda419d1501a05a1100c, type: 3}
   - {fileID: 2800000, guid: d4f1a107d021310429c7bbd352ccd4ab, type: 3}
