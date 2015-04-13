@@ -159,6 +159,15 @@ public class PlayerScript : MonoBehaviour {
             GUI.Box(new Rect(0, Screen.height - 25, Screen.width * (1 - sprintCooldown / 3), 25), GUIContent.none, style);
         }
 
+        if (!canMove) {
+            GUI.skin.label.fontSize = 100;
+            
+            GUIStyle style = GUI.skin.GetStyle("Label");
+            style.normal.textColor = Color.red;
+            style.fontStyle = FontStyle.Bold;
+            style.alignment = TextAnchor.MiddleCenter;
+            GUI.Label(new Rect(0, 0, Screen.width, Screen.height), "YOU DIED");
+        }
     }
 
 }

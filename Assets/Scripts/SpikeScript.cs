@@ -4,7 +4,6 @@ using System.Collections;
 public class SpikeScript : MonoBehaviour {
     private int damage;
 
-    private Transform player;
     private Transform mesh;
 
     private Vector3 localBottom;
@@ -12,13 +11,12 @@ public class SpikeScript : MonoBehaviour {
     private Vector3 localFullPoke;
     private bool fullPoke = false;
     private float fullPokeTimer = 0f;
+    private AudioSource source;
 
     // Use this for initialization
     void Start() {
         damage = 1;
-
-        player = GameObject.Find("Player").transform;
-
+        source = GetComponent<AudioSource>();
         int attribs = 24;
 
         Mesh m = new Mesh();
@@ -102,7 +100,6 @@ public class SpikeScript : MonoBehaviour {
     }
 
     void Update() {
-        //float sqrMag = (transform.position - player.position).sqrMagnitude;
         Collider[] colliders = Physics.OverlapSphere(transform.position, 1.5f);
         bool pokeout = false;
         for (int i = 0; i < colliders.Length; i++) {
@@ -133,6 +130,7 @@ public class SpikeScript : MonoBehaviour {
             col.gameObject.BroadcastMessage("ApplyDamage", damage);
             fullPokeTimer = 2f;
             fullPoke = true;
+            source.PlayOneShot(source.clip);
         }
     }
 }
