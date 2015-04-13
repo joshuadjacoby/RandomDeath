@@ -4,24 +4,27 @@ using System.Collections;
 public class TrapdoorScript : MonoBehaviour
 {
 	public static bool inTrap = false;
+	public static bool doorUnlocked = false;
+	private GameObject g;
 
     // Use this for initialization
     void Start() 
     {
-
+		g = GetComponent<GameObject> ();
     }
 
     // Update is called once per frame
     void Update()
     {
-		/*if (inTrap == true) {
 
-			transform.position += new Vector3(0,0,0);
+		/*if(doorUnlocked == true)
+		{
+			doorUnlock();
 
 		}*/
-    }
+   }
 
-    void OnCollisionEnter(Collision col)
+    /*void OnCollisionEnter(Collision col)
     {
         if (col.gameObject.tag == "Player") 
         {
@@ -32,13 +35,18 @@ public class TrapdoorScript : MonoBehaviour
         }
     }
 
+	public void doorUnlock()
+	{
+		g.SetActive (false);
+	}
+
 	void OnCollisionExit(Collision col)
 	{
 		if (col.gameObject.tag == "Player") 
 		{
-			//col.gameObject.BroadcastMessage("toggleTrap");
 			inTrap = false;
+			col.gameObject.BroadcastMessage("Reset");
 			
 		}
-	}
+	}*/
 }

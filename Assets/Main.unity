@@ -287,8 +287,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cda5c4e0f3f3a45ea8d44ee5fc6f146c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  index: 0
-  isLocked: 1
   A: {fileID: 1770787636}
   B: {fileID: 1757317797}
   X: {fileID: 1608523559}
