@@ -249,7 +249,7 @@ public class LevelLoader : MonoBehaviour {
 
     public void addUvsTris(int index) {
         if (index == WALL) {
-            index = Random.value < .2 ? 9 : WALL;
+            index = Random.value < .75 ? Random.Range(9, 15) : WALL;
         }
 
         if (index == SPIKES || index == LOCKED_DOOR) {
@@ -258,12 +258,19 @@ public class LevelLoader : MonoBehaviour {
 
         Rect r = rects[index];
 
-        uvs.Add(new Vector2(r.xMin , r.yMax ));
-        uvs.Add(new Vector2(r.xMin , r.yMin ));
-        uvs.Add(new Vector2(r.xMax , r.yMin ));
-        uvs.Add(new Vector2(r.xMax , r.yMin ));
-        uvs.Add(new Vector2(r.xMax , r.yMax ));
-        uvs.Add(new Vector2(r.xMin , r.yMax ));
+        //uvs.Add(new Vector2(r.xMin , r.yMax ));
+        //uvs.Add(new Vector2(r.xMin , r.yMin ));
+        //uvs.Add(new Vector2(r.xMax , r.yMin ));
+        //uvs.Add(new Vector2(r.xMax , r.yMin ));
+        //uvs.Add(new Vector2(r.xMax , r.yMax ));
+        //uvs.Add(new Vector2(r.xMin , r.yMax ));
+
+        uvs.Add(new Vector2(r.xMin, r.yMin));
+        uvs.Add(new Vector2(r.xMin, r.yMax));
+        uvs.Add(new Vector2(r.xMax, r.yMax));
+        uvs.Add(new Vector2(r.xMax, r.yMax));
+        uvs.Add(new Vector2(r.xMax, r.yMin));
+        uvs.Add(new Vector2(r.xMin, r.yMin));
 
         tris.Add(triNum++);
         tris.Add(triNum++);

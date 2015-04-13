@@ -8,8 +8,8 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 468038}
-  - 65: {fileID: 6559870}
   - 114: {fileID: 11400234}
+  - 135: {fileID: 13544636}
   m_Layer: 0
   m_Name: Bear Trap
   m_TagString: Untagged
@@ -29,18 +29,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
---- !u!65 &6559870
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 180790}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: .5, y: .5, z: .5}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &11400234
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -52,6 +40,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf52dd3225ff91e43b83614fe92a3b0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!135 &13544636
+SphereCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 180790}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: .25
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

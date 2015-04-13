@@ -29,7 +29,7 @@ public class DisplayButton : MonoBehaviour {
         Reset();
 	}
 
-	void Reset()
+	public void Reset()
 	{
 		key = "";
 		for (int i = 0; i < 6; ++i) {
