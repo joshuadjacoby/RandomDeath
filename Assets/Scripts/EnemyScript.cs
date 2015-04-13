@@ -20,6 +20,9 @@ public class EnemyScript : MonoBehaviour {
     public Material grab;
     private MeshRenderer mr;
 
+    public AudioClip[] clips;
+    private AudioSource source; 
+
 	// Use this for initialization
 	void Start () {
 		player = GameObject.Find ("Player");
@@ -34,6 +37,8 @@ public class EnemyScript : MonoBehaviour {
         mr = transform.Find("Mesh").GetComponent<MeshRenderer>();
         mr.material = normal;
 
+        source = GetComponent<AudioSource>();
+        
 		// RS: Movement stuff
 		lastSeen = player.transform.position;
 		direction = Random.Range (-2, 4);
@@ -62,6 +67,10 @@ public class EnemyScript : MonoBehaviour {
 	void Update () {
         if (health <= 0)
             Destroy(gameObject);
+
+        if (Random.value < 0.001f) {
+            source.PlayOneShot(clips[0]);
+        }
 
 		float step = speed * Time.deltaTime;
 		if (!isAgro)
