@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class LevelLoader : MonoBehaviour {
 
-    private int currentLevel = 3;
+    private int currentLevel = 9000;
     public int[,] tiles;
     private int numberOfLevels;
 
@@ -106,7 +106,7 @@ public class LevelLoader : MonoBehaviour {
 
         // turn into 2D array
         for (int i = 0; i < tiles1D.Length; i++) {
-            tiles[i % width, i / height] = tiles1D[i];
+            tiles[i % width, i / width] = tiles1D[i];
         }
 
         tris.Clear();
