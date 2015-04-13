@@ -21,7 +21,8 @@ public class EnemyScript : MonoBehaviour {
     private MeshRenderer mr;
 
     public AudioClip[] clips;
-    private AudioSource source; 
+    private AudioSource source;
+    private float grtimer;
 
 	// Use this for initialization
 	void Start () {
@@ -38,6 +39,7 @@ public class EnemyScript : MonoBehaviour {
         mr.material = normal;
 
         source = GetComponent<AudioSource>();
+        grtimer = 0;
         
 		// RS: Movement stuff
 		lastSeen = player.transform.position;
@@ -63,14 +65,17 @@ public class EnemyScript : MonoBehaviour {
         health -= i;
     }
 
+    void Growling()
+    {
+        if(Random.value < 0.0005)
+            source.PlayOneShot(clips[0]);
+    }
+
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
         if (health <= 0)
             Destroy(gameObject);
-
-        if (Random.value < 0.001f) {
-            source.PlayOneShot(clips[0]);
-        }
+        Growling();
 
 		float step = speed * Time.deltaTime;
 		if (!isAgro)
