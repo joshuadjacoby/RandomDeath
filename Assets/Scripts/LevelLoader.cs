@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class LevelLoader : MonoBehaviour {
 
-    private int currentLevel = 9000;
+    private int currentLevel = 3;
     public int[,] tiles;
     private int numberOfLevels;
 
@@ -122,14 +122,16 @@ public class LevelLoader : MonoBehaviour {
                 int h = getHeight(x, y); //gets the height of this tile
 
                 // add 2 triangles for this tile
-                verts.Add(new Vector3(x, h, y));
-                verts.Add(new Vector3(x, h, y + 1));
-                verts.Add(new Vector3(x + 1, h, y + 1));
-                verts.Add(new Vector3(x + 1, h, y + 1));
-                verts.Add(new Vector3(x + 1, h, y));
-                verts.Add(new Vector3(x, h, y));
+                if (h == 0) {
+                    verts.Add(new Vector3(x, h, y));
+                    verts.Add(new Vector3(x, h, y + 1));
+                    verts.Add(new Vector3(x + 1, h, y + 1));
+                    verts.Add(new Vector3(x + 1, h, y + 1));
+                    verts.Add(new Vector3(x + 1, h, y));
+                    verts.Add(new Vector3(x, h, y));
 
-                addUvsTris(tiles[x, y]);
+                    addUvsTris(tiles[x, y]);
+                }
 
                 // if this tile is high and neighbors are low then add walls down your sides
                 if (h == 1) {

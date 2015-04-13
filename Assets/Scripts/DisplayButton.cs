@@ -14,15 +14,19 @@ public class DisplayButton : MonoBehaviour {
 	private Renderer Br;
 	private Renderer Xr;
 	private Renderer Yr;
-	private GameObject g;
-	private GameObject currentDoor;
-	private Collider c;
+	private TrapdoorScript currentDoor;
 	private int j;
 	private bool isCompleted = false;
 	private bool touchingDoor = false;
 
 	void Start () {
-		Reset ();
+
+        Ar = A.GetComponent<Renderer>();
+        Br = B.GetComponent<Renderer>();
+        Xr = X.GetComponent<Renderer>();
+        Yr = Y.GetComponent<Renderer>();
+
+        Reset();
 	}
 
 	void Reset()
@@ -34,27 +38,20 @@ public class DisplayButton : MonoBehaviour {
 		//tempr = temp.GetComponent<Renderer> ();
 
 		j = 0;
-		
-		c = GetComponent<Collider> ();
-		//X = g.transform.GetChild (2);
-		g = GetComponent<GameObject> ();
-		Ar = A.GetComponent<Renderer> ();
-		Br = B.GetComponent<Renderer> ();
-		Xr = X.GetComponent<Renderer> ();
-		Yr = Y.GetComponent<Renderer> ();
+
 		//tempr = temp.GetComponent<Renderer> ();
 		Ar.enabled = false;
 		Br.enabled = false;
 		Xr.enabled = false;
 		Yr.enabled = false;
 		touchingDoor = false;
-		//tempr.enabled = false;
+        isCompleted = false;
 	}
 
 	// Update is called once per frame
 	void Update()
 	{
-		if (j < 6 && touchingDoor && isCompleted == false) {
+		if (j < 6 && touchingDoor && !isCompleted) {
 
 			if (key [j] == 'A') {
 				Ar.enabled = true;
@@ -96,11 +93,8 @@ public class DisplayButton : MonoBehaviour {
 			// DOOR UNLOCKED
 			j=0;
 			isCompleted = true;
-			currentDoor.SetActive(false);
+            currentDoor.lowerDoor();
 			Reset ();
-			//TrapdoorScript.inTrap = false;
-			//c.gameObject.BroadcastMessage("doorUnlock");
-			//TrapdoorScript.doorUnlocked = true;
 		}
 
 	}
@@ -109,7 +103,7 @@ public class DisplayButton : MonoBehaviour {
 	{
 		if (col.gameObject.tag == "TrapDoor") 
 		{
-			currentDoor = col.gameObject;
+			currentDoor = col.gameObject.GetComponent<TrapdoorScript>();
 			touchingDoor = true;
 			
 		}
@@ -121,7 +115,7 @@ public class DisplayButton : MonoBehaviour {
 		if (col.gameObject.tag == "TrapDoor") 
 		{
 			currentDoor = null;
-			Reset ();
+            Reset();
 		}
 	}
 

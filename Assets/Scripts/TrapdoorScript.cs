@@ -1,52 +1,31 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class TrapdoorScript : MonoBehaviour
-{
-	public static bool inTrap = false;
-	public static bool doorUnlocked = false;
-	private GameObject g;
+public class TrapdoorScript : MonoBehaviour {
+    public static bool inTrap = false;
+    public static bool doorUnlocked = false;
+    private Transform mesh;
+    private bool lowering = false;
 
     // Use this for initialization
-    void Start() 
-    {
-		g = GetComponent<GameObject> ();
+    void Start() {
+        mesh = transform.Find("Mesh");
     }
 
     // Update is called once per frame
-    void Update()
-    {
-
-		/*if(doorUnlocked == true)
-		{
-			doorUnlock();
-
-		}*/
-   }
-
-    /*void OnCollisionEnter(Collision col)
-    {
-        if (col.gameObject.tag == "Player") 
-        {
-			//col.gameObject.transform.position = Vector3.MoveTowards(col.gameObject.transform.position, transform.position, 1);
-			//col.gameObject.BroadcastMessage("toggleTrap");
-			inTrap = true;
-
+    void Update() {
+        if (lowering) {
+            mesh.localPosition = new Vector3(mesh.localPosition.x, mesh.localPosition.y - Time.deltaTime, mesh.localPosition.z);
+            if (mesh.localPosition.y < -1) {
+                Destroy(gameObject);
+            }
         }
+        
     }
 
-	public void doorUnlock()
-	{
-		g.SetActive (false);
-	}
+    public void lowerDoor() {
 
-	void OnCollisionExit(Collision col)
-	{
-		if (col.gameObject.tag == "Player") 
-		{
-			inTrap = false;
-			col.gameObject.BroadcastMessage("Reset");
-			
-		}
-	}*/
+        lowering = true;
+    }
+
 }
